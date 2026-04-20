@@ -17,6 +17,11 @@ public class Pages {
     public MyLeavePage myleave;
     public MyLeaveReportPage myleavereport;
     public AssginLeavePage assignLeave;
+    public addUserPage au;
+    public addJobTitlePage jt;
+    public organizationPage ong;
+    public pimAddEmpPage aep;
+    public PimCusDataPage pcd;
 
     // 🔥 Constructor (IMPORTANT)
     public Pages(WebDriver driver) {
@@ -31,5 +36,10 @@ public class Pages {
         myleave = PageFactory.initElements(driver, MyLeavePage.class);
         myleavereport = PageFactory.initElements(driver, MyLeaveReportPage.class);
         assignLeave = PageFactory.initElements(driver, AssginLeavePage.class);
+        ong=PageFactory.initElements(driver, organizationPage.class);
+    	aep=PageFactory.initElements(driver, pimAddEmpPage.class);
+    	jt=PageFactory.initElements(driver, addJobTitlePage.class); 
+    	au=PageFactory.initElements(driver, addUserPage.class); 
+    	pcd=PageFactory.initElements(driver, PimCusDataPage.class);
     }
 }
