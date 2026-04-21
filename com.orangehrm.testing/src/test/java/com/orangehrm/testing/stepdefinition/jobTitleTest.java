@@ -1,5 +1,9 @@
 package com.orangehrm.testing.stepdefinition;
 
+import java.time.Duration;
+
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.orangehrm.seleniumuiframwork_genricutility.Base;
@@ -47,13 +51,16 @@ public class jobTitleTest extends Base {
 		jt.setNoteField(dataTable);
 		jt.setSaveJobTitle();
 	}
+
 	@Then("job title should be added successfully")
 	public void job_title_should_be_added_successfully() {
-		String actualText = jt.getVerifyjob().getText();
-		Assert.assertEquals(actualText, "Success");
-		System.out.println("Successfully Saved");
-	   }
 
+	    WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+	    wait.until(ExpectedConditions.visibilityOf(jt.getVerifyjob()));
+	    String actualText = jt.getVerifyjob().getText();
+	    Assert.assertEquals(actualText, "Successfully Saved");
+	    System.out.println("Successfully Saved");
+	}
 
 
 }

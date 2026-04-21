@@ -51,12 +51,15 @@ public class addEmpTest extends Base{
 	@When("user leaves last name blank")
 	public void user_leaves_last_name_blank() {
 	    aep.getMiddleName();
-	    aep.getSaveButton();
+//	    aep.getSaveButton();
+	    aep.clickSaveButton();
 	}
 	@Then("system should display error message {string}")
 	public void system_should_display_error_message(String string) {
 		String actualText = aep.getVerifyError().getText();
 		Assert.assertEquals(actualText, string);
+//		 String actualText = aep.getSuccessMessage();
+//		    Assert.assertEquals(actualText, string);
 		System.out.println("Negative Scenario Exicuted");
 	}
 }
