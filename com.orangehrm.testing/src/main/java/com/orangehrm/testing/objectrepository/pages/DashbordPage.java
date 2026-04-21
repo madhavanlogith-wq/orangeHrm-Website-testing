@@ -1,67 +1,154 @@
 package com.orangehrm.testing.objectrepository.pages;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class DashbordPage {
+import com.orangehrm.seleniumuiframwork_genricutility.Base;
+
+
+public class DashbordPage extends Base{
+	
+	private WebDriver driver;
+	
+    public DashbordPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+    
 	@FindBy(linkText="PIM")
 	private WebElement pimLink;
 	
-	@FindBy(css="[class=\'oxd-userdropdown-tab\']")
+	@FindBy(css="[class=\"oxd-userdropdown-tab\"]")
 	private WebElement logoutDroupDown;
 	
-	@FindBy(xpath="//a[.='Logout']")
+	@FindBy(linkText="Logout")
 	private WebElement logoutButton;
 
 	@FindBy(linkText="Recruitment")
 	private WebElement recrutmentLink;
-	
-	@FindBy(css = "[href='/web/index.php/leave/viewLeaveModule']")
+
+	@FindBy(linkText="Leave")
 	private WebElement leaveLink;
 	
-	public WebElement getRecrutmentLink() {
-		return recrutmentLink;
-	}
+	@FindBy(linkText="Admin")
+	private WebElement adminLink;
+	
+	@FindBy(linkText="My Info")
+	private WebElement myInfoLink;
 
-	public void clickRecrutmentLink() {
-		getRecrutmentLink().click();;
-	}
+	@FindBy(linkText="Time")
+	private WebElement timeLink;
+
+	@FindBy(linkText="Claim")
+	private WebElement claimLink;
+	
+	@FindBy(linkText="Maintenance")
+	private WebElement maintenceLink;
+	
+	@FindBy(linkText="Directory")
+	private WebElement directory;
+
+	@FindBy(linkText="Buzz")
+	private WebElement BuzzLink;
+
+	
 
 	public WebElement getPimLink() {
 		return pimLink;
-	}
-
-	public void clickPimLink() {
-		getPimLink().click();
 	}
 
 	public WebElement getLogoutDroupDown() {
 		return logoutDroupDown;
 	}
 
-	public void clickLogoutDroupDown() {
-		getLogoutDroupDown().click();
-	}
 	public WebElement getLogoutButton() {
 		return logoutButton;
 	}
 
-	public void clickLogoutButton() {
-		getLogoutButton().click();
+	public WebElement getRecrutmentLink() {
+		return recrutmentLink;
 	}
-	
+
 	public WebElement getLeaveLink() {
 		return leaveLink;
 	}
 
-	public void dashboardPage() {
-		clickPimLink();
-		clickLogoutDroupDown();
-		clickRecrutmentLink();
+	public WebElement getAdminLink() {
+		return adminLink;
 	}
-	public void logout() {
-		clickLogoutDroupDown();
-		clickLogoutButton();
+
+	public WebElement getMyInfoLink() {
+		return myInfoLink;
 	}
-	
+
+	public WebElement getTimeLink() {
+		return timeLink;
+	}
+
+	public WebElement getClaimLink() {
+		return claimLink;
+	}
+
+	public WebElement getMaintenceLink() {
+		return maintenceLink;
+	}
+
+	public WebElement getDirectory() {
+		return directory;
+	}
+
+	public void setPimLink() {
+		getPimLink().click();
+	}
+
+	public void setLogoutDroupDown() {
+		getLogoutDroupDown().click();
+	}
+
+	public void setLogoutButton() {
+		getLogoutButton().click();
+	}
+
+	public void setRecrutmentLink() {
+		getRecrutmentLink().click();
+	}
+
+	public void setLeaveLink() {
+		getLeaveLink().click();
+	}
+
+	public void setAdminLink() {
+		getAdminLink().click();
+	}
+
+	public void setMyInfoLink() {
+		getMyInfoLink().click();
+	}
+
+	public void setTimeLink() {
+		getTimeLink().click();
+	}
+
+	public void setClaimLink() {
+		getClaimLink().click();
+	}
+
+	public void setMaintenceLink() {
+		getMaintenceLink().click();
+	}
+
+	public void setDirectory() {
+		getDirectory().click();
+	}
+
+	public void setBuzzLink() {
+		getBuzzLink().click();
+	}
+
+	public WebElement getBuzzLink() {
+		return BuzzLink;
+	}
+
 }
