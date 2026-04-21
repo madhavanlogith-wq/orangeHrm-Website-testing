@@ -9,9 +9,6 @@ Scenario: Add candidate with valid mandatory details
   Given User navigates to Recruitment module
   When User clicks on Add Candidate button
   And User enters candidate details
-    | FirstName | John                 |
-    | LastName  | Doe                  |
-    | Email     | john.doe@example.com |
   Then Candidate should be added successfully
   
              # =========================
