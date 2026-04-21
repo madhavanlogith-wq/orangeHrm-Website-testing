@@ -9,8 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.orangehrm.testing.utilities.BaseClass;
-import com.orangehrm.testing.utilities.Pages;
+import com.orangehrm.seleniumuiframwork_genricutility.Base;
+import com.orangehrm.seleniumuiframwork_genricutility.Pages;
 
 import java.time.Duration;
 import java.util.Map;
@@ -22,7 +22,7 @@ public class RecruitmentSteps {
 
     @Before
     public void init() {
-        pages = new Pages(BaseClass.getDriver());
+        pages = new Pages(Base.getDriver());
     }
 
     // ================= LOGIN =================
@@ -30,9 +30,9 @@ public class RecruitmentSteps {
     @Given("User is already logged in")
     public void already_logged_in() {
 
-        BaseClass.getDriver().get("https://opensource-demo.orangehrmlive.com/");
-
-        pages.lp.login("Admin", "admin123");
+//        Base.getDriver().get("https://opensource-demo.orangehrmlive.com/");
+//
+//        pages.loginpage.loginPage("Admin", "admin123");
     }
 
     // ================= ADD CANDIDATE =================
@@ -72,7 +72,7 @@ public class RecruitmentSteps {
 
         pages.rp.goToRecruitment();
 
-        WebDriverWait wait = new WebDriverWait(BaseClass.getDriver(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(Base.getDriver(), Duration.ofSeconds(10));
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//a[text()='Vacancies']")
@@ -129,7 +129,7 @@ public class RecruitmentSteps {
     public void verifySearchCandidate() {
 
         Assert.assertTrue(
-                BaseClass.getDriver().getCurrentUrl().contains("viewCandidate"),
+                Base.getDriver().getCurrentUrl().contains("viewCandidate"),
                 "Candidate details page not opened"
         );
     }

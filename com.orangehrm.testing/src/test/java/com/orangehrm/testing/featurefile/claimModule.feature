@@ -4,7 +4,8 @@ Feature: Claims Module
     Given user is logged into the application
     And user is on dashboard
     When user navigates to Claim module
-
+    
+   @Admin
   Scenario: Submit claim successfully and verify submission
 
     When user navigates to Submit Claim section
@@ -17,6 +18,7 @@ When user clicks Submit button
 Then claim should be submitted successfully
 
 
+@Admin
   Scenario: Search claim by reference ID and verify navigation using dynamic URL
 
     When user clicks on My Claims section
