@@ -292,4 +292,46 @@ public class LeaveModule {
     public void verify_leave_records_matching_all_selected_filters_are_displayed_on_the_leave_list(String name) {
         pages.leavelist.verify_emps_filtered(Base.getDriver(), name);
     }
+    
+    // ================= CONFIGURE LEAVE PERIOD =================
+
+    @When("navigate to Leave module to perform configure")
+    public void navigate_to_leave_module_to_perform_configure() {
+        pages.dashboardpage.getLeaveLink().click();
+    }
+
+    @When("click on Configure dropdown")
+    public void click_on_configure_dropdown() {
+        pages.leavepage.getConfigureBtn().click();
+    }
+
+    @When("click on Leave Period")
+    public void click_on_leave_period() {
+        pages.leavepage.getLeavePeriodBtnOnConfigure().click();
+    }
+
+    @When("select Start Month {string} for leave period")
+    public void select_start_month_for_leave_period(String month) {
+        pages.leaveperiod.selectStartMonth(Base.getDriver(), month);
+    }
+
+    @When("select Start Date {string} for leave period start date")
+    public void select_start_date_for_leave_period_start_date(String date) {
+        pages.leaveperiod.selectStartDate(Base.getDriver(), date);
+    }
+
+    @When("click on Save button on leave period")
+    public void click_on_save_button_on_leave_period() {
+        pages.leaveperiod.clickSave(Base.getDriver());
+    }
+
+    @Then("verify success message {string} on leave period")
+    public void verify_success_message_on_leave_period(String msg) {
+        pages.leaveperiod.verify_leave_period_successfully_saved(Base.getDriver());
+    }
+    
+    @When("failed message {string}")
+    public void failed_message(String string) {
+      
+    }
 }
