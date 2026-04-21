@@ -4,6 +4,7 @@ Background:
   Given user is on dashboard page
 # ================= ADD JOB TITLE =================
 
+@Admin
 Scenario: Add new job title with all fields
     When user navigates to job titles
     And user clicks add button

@@ -1,4 +1,8 @@
 /target/
 test-output/
 *.class
+<<<<<<< HEAD
 reports
+=======
+reports
+>>>>>>> origin/main

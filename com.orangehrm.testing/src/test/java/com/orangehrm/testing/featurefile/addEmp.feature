@@ -3,7 +3,7 @@ Feature: OrangeHRM Admin Job Module Automation
 Background:
     Given user is on dashboard page
 
-  @Positive
+  @Admin
   Scenario: Add employee with valid details
     Given user clicks on Add Employee button
     When user enters first name "Amirtha"
@@ -14,7 +14,7 @@ Background:
     Then system should display message "Successfully Saved"
 
 
-  @Negative
+  @Admin
   Scenario: Add employee without mandatory fields
     Given user clicks on Add Employee button
     When user leaves first name blank

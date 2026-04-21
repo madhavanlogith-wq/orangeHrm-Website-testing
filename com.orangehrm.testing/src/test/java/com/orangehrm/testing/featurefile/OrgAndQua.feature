@@ -4,7 +4,8 @@ Background:
   Given user is on dashboard page
   
    # ================= LOCATION =================
-
+   
+  @Admin
   Scenario Outline: Add new location
     When user navigates to organization  
     And user clicks locations link

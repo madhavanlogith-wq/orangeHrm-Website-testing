@@ -1,13 +1,15 @@
 package com.orangehrm.testing.stepdefinition;
-package com.orangehrm.testing.stepdefinition;
+
 
 import org.testng.Assert;
 
 import com.orangehrm.seleniumuiframwork_genricutility.Base;
 import com.orangehrm.seleniumuiframwork_genricutility.Pages;
 
+
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.*;
+
 
 import java.util.Map;
 
@@ -15,17 +17,30 @@ public class RecruitmentSteps {
 
     private Pages pages;
 
+
     // ✅ Thread-safe Pages initialization
     public RecruitmentSteps() {
         this.pages = new Pages(Base.getDriver());
+=======
+    @Before
+    public void init() {
+        pages = new Pages(Base.getDriver());
+>>>>>>> origin/main
     }
 
     // ================= LOGIN =================
 
     @Given("User is already logged in")
     public void already_logged_in() {
+<<<<<<< HEAD
         Base.getDriver().get("https://opensource-demo.orangehrmlive.com/");
         pages.lp.login("Admin", "admin123");
+=======
+
+//        Base.getDriver().get("https://opensource-demo.orangehrmlive.com/");
+//
+//        pages.loginpage.loginPage("Admin", "admin123");
+>>>>>>> origin/main
     }
 
     // ================= ADD CANDIDATE =================
@@ -67,6 +82,16 @@ public class RecruitmentSteps {
     @When("User navigates to Recruitment vacancies section")
     public void go_to_vacancy_section() {
         pages.rp.goToRecruitment();
+<<<<<<< HEAD
+=======
+
+        WebDriverWait wait = new WebDriverWait(Base.getDriver(), Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//a[text()='Vacancies']")
+        ));
+
+>>>>>>> origin/main
         pages.vp.goToVacancy();
     }
 
@@ -114,7 +139,11 @@ public class RecruitmentSteps {
 
         Assert.assertTrue(
                 Base.getDriver().getCurrentUrl().contains("viewCandidate"),
+<<<<<<< HEAD
                 "Candidate page not opened"
+=======
+                "Candidate details page not opened"
+>>>>>>> origin/main
         );
     }
 
