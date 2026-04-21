@@ -4,6 +4,7 @@ Background:
   Given user is on dashboard page
 # ================= ADD JOB TITLE =================
 
+@Admin
 Scenario: Add new job title with all fields
     When user navigates to job titles
     And user clicks add button
@@ -14,4 +15,4 @@ Scenario: Add new job title with all fields
     And user adds job note
         | Senior role |
     And user clicks save button
-    Then jo
+    Then job title should be added successfully

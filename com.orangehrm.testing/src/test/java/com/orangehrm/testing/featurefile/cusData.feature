@@ -4,7 +4,7 @@ Background:
   Given user is on dashboard page
   
    # ================= Custom Fields Configuration =================
-
+@Admin
  Scenario: Add custom field with dropdown values
     Given user navigates to PIM module
     When user clicks on Configuration menu
