@@ -2,7 +2,11 @@
 test-output/
 *.class
 <<<<<<< HEAD
+<<<<<<< HEAD
 reports
 =======
 reports
 >>>>>>> origin/main
+=======
+report
+>>>>>>> branch 'thirishya' of https://github.com/madhavanlogith-wq/orangeHrm-Website-testing.git
