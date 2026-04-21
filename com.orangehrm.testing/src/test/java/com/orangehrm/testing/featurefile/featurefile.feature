@@ -4,7 +4,7 @@ Feature:Recruitment Module - Candidate and Vacancy Management
     Given User is already logged in
 
              
-            # Scenario 1 - Add Candidate
+@Admin            # Scenario 1 - Add Candidate
 Scenario: Add candidate with valid mandatory details
   Given User navigates to Recruitment module
   When User clicks on Add Candidate button
@@ -17,6 +17,7 @@ Scenario: Add candidate with valid mandatory details
              # =========================
              # Scenario 2 - Add Vacancy
              # =========================
+  @Admin
   Scenario:Create vacancy with valid details
     Given User navigates to Recruitment > Vacancies section
     When User clicks on Add Vacancy button
@@ -30,6 +31,7 @@ Scenario: Add candidate with valid mandatory details
             # =========================
             # Scenario 3 - Candidate Search + View
             # =========================
+  @Admin
   Scenario:Search and view candidate details
     Given User navigates to Candidate list page
     When User searches candidate "John Doe"
@@ -39,6 +41,8 @@ Scenario: Add candidate with valid mandatory details
            # =========================
            # Scenario 4 - Vacancy Search + View
            # =========================
+           
+  @Admin
   Scenario:Search and view vacancy details
     Given User navigates to Vacancy list page
     When User searches vacancy "Software Engineer"
@@ -48,7 +52,7 @@ Scenario: Add candidate with valid mandatory details
          # =========================
          # Scenario 5 - Scenario Outline (Email Validation)
          # =========================
-
+  @Admin
   Scenario Outline:Validate invalid email formats while adding candidate
     Given User is on Add Candidate page
     When User enters FirstName as "<FirstName>"
@@ -67,8 +71,8 @@ Scenario: Add candidate with valid mandatory details
       # =========================
       # Scenario 6 - Scenario Outline (Empty Fields)
       # =========================
-
-
+      
+  @Admin
   Scenario:Validate system shows error when saving empty form
     Given User is on Add Candidate page
     When User clicks Save button without entering any data

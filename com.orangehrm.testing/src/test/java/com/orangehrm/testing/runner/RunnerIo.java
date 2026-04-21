@@ -7,7 +7,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
-		features = {"C:\\Users\\acer\\git\\orangehrm-automation\\com.orangehrm.testing\\src\\test\\java\\com\\orangehrm\\testing\\featurefile\\LeaveModule.feature"},
+		features = {"./src/test/java/com/orangehrm/testing/featurefile"},
 		glue = "com.orangehrm.testing.stepdefinition",
 		dryRun = !true,
 		monochrome = true,
