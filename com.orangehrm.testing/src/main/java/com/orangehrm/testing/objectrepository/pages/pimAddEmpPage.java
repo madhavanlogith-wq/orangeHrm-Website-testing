@@ -1,9 +1,13 @@
 package com.orangehrm.testing.objectrepository.pages;
 
+import java.time.Duration;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.orangehrm.seleniumuiframwork_genricutility.Base;
 
@@ -20,7 +24,7 @@ public class pimAddEmpPage extends Base{
     @FindBy(xpath = "//button[.=' Add ']")
 	private WebElement addButton ;
 	
-	@FindBy(xpath = "//input[@name=\'firstName\']")
+	@FindBy(xpath = "//input[@name='firstName']")
 	private WebElement firstName ;
 	
 	@FindBy(xpath = "//input[@name='middleName']")
@@ -123,5 +127,15 @@ public class pimAddEmpPage extends Base{
 		  getGetVerify().getText();
 	  }
 	
+	  @FindBy(className = "oxd-form-loader")
+	  private WebElement loader;
+
+	  public void clickSaveButton() {
+		  getSaveButton().click();
+	  }
+
+	  public String getSuccessMessage() {
+	      return getVerify.getText();
+	  }
 
 }

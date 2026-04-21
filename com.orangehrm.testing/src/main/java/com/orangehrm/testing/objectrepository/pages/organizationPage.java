@@ -65,8 +65,9 @@ public class organizationPage extends Base {
 
 	// ===== SUCCESS MESSAGE =====
 
-	@FindBy(xpath = "//p[.='Successfully Saved']")
+	@FindBy(xpath = "//p[.='Success']")
 	private WebElement successMessage;
+
 
     // ================= GETTER =================
 

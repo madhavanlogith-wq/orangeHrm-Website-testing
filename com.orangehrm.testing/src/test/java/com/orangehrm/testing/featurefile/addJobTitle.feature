@@ -9,7 +9,7 @@ Scenario: Add new job title with all fields
     When user navigates to job titles
     And user clicks add button
     And user enters job title
-        | Softwere Engeener |
+        | HardWere Engeener |
     And user enters job description
         | Responsible for data analysis |
     And user adds job note
