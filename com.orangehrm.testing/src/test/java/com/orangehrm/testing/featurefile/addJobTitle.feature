@@ -14,4 +14,4 @@ Scenario: Add new job title with all fields
     And user adds job note
         | Senior role |
     And user clicks save button
-    Then jo
+    Then job title should be added successfully

@@ -10,6 +10,9 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.UUID;
 
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -139,4 +142,30 @@ public class AllUtilityFunction {
 		public String getPropertyValue(String key) {
 			return properties.getProperty(key);
 		}
+		
+		public static Object[][] getData(String sheetName) {
+
+	        try {
+	            FileInputStream fis = new FileInputStream("./src/test/resources/Reader/locationData.xlsx");
+	            Workbook wb = WorkbookFactory.create(fis);
+	            Sheet sheet = wb.getSheet(sheetName);
+
+	            int rows = sheet.getPhysicalNumberOfRows();
+	            int cols = sheet.getRow(0).getPhysicalNumberOfCells();
+
+	            Object[][] data = new Object[rows - 1][cols];
+
+	            for (int i = 1; i < rows; i++) {
+	                for (int j = 0; j < cols; j++) {
+	                    data[i - 1][j] = sheet.getRow(i).getCell(j).toString();
+	                }
+	            }
+
+	            wb.close();
+	            return data;
+
+	        } catch (Exception e) {
+	            throw new RuntimeException(e);
+	        }
+	    }
 }
