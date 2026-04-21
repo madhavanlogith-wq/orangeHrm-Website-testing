@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.orangehrm.seleniumuiframwork_genricutility.AllUtilityFunction;
 import com.orangehrm.seleniumuiframwork_genricutility.Base;
 import com.orangehrm.seleniumuiframwork_genricutility.Pages;
 
@@ -26,6 +27,18 @@ public class RecruitmentSteps {
     }
 
     // ================= LOGIN =================
+//  Excel Data Variables
+    String FirstName,LastName,Email;
+
+    //  Load Excel Data Before Scenario
+    @Before
+    public void loadExcelData() {
+        Object[][] data = AllUtilityFunction.getData("Candidate Data");
+
+        FirstName = data[0][0].toString();
+        LastName  = data[0][1].toString();
+        Email     = data[0][2].toString();
+    }
 
     @Given("User is already logged in")
     public void already_logged_in() {
@@ -36,34 +49,53 @@ public class RecruitmentSteps {
     }
 
     // ================= ADD CANDIDATE =================
-
     @Given("User navigates to Recruitment module")
-    public void goToRecruitment() {
-        pages.rp.goToRecruitment();
+    public void user_navigates_to_recruitment_module() {
+    	pages.rp.goToRecruitment();
     }
 
     @When("User clicks on Add Candidate button")
-    public void clickAddCandidate() {
-        pages.rp.clickAdd();
+    public void user_clicks_on_add_candidate_button() {
+    	pages.rp.clickAdd();
     }
 
     @When("User enters candidate details")
-    public void enterCandidateDetails(DataTable data) {
-
-        Map<String, String> map = data.asMap(String.class, String.class);
-
-        pages.cp.addCandidate(
-                map.get("FirstName"),
-                map.get("LastName"),
-                map.get("Email")
-        );
-    }
+    public void user_enters_candidate_details() {
+    	pages.cp.addCandidate(FirstName, LastName, Email);
+            }
 
     @Then("Candidate should be added successfully")
-    public void verifyCandidate() {
-
+    public void candidate_should_be_added_successfully() {
     	Assert.assertNotNull(pages.cp.getResult());
     }
+
+//    @Given("User navigates to Recruitment module")
+//    public void goToRecruitment() {
+//        pages.rp.goToRecruitment();
+//    }
+//
+//    @When("User clicks on Add Candidate button")
+//    public void clickAddCandidate() {
+//        pages.rp.clickAdd();
+//    }
+//
+//    @When("User enters candidate details")
+//    public void enterCandidateDetails(DataTable data) {
+//
+//        Map<String, String> map = data.asMap(String.class, String.class);
+//
+//        pages.cp.addCandidate(
+//                map.get("FirstName"),
+//                map.get("LastName"),
+//                map.get("Email")
+//        );
+//    }
+//
+//    @Then("Candidate should be added successfully")
+//    public void verifyCandidate() {
+//
+//    	Assert.assertNotNull(pages.cp.getResult());
+//    }
 
     // ================= ADD VACANCY =================
 
