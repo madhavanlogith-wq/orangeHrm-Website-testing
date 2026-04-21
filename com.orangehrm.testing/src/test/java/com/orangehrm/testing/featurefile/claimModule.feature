@@ -20,7 +20,7 @@ Scenario: Submit claim successfully and verify submission
   Scenario: Search claim by reference ID and verify navigation using dynamic URL
 
     When user clicks on My Claims section
-    And user enters reference ID "202604210000007"
+    And user enters reference ID 
     And user selects reference ID from dropdown
     And user clicks on Search button
 

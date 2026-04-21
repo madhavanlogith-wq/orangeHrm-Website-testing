@@ -18,6 +18,7 @@ public class My_Claims {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
 
+    
     // ===== LOCATORS =====
 
     @FindBy(xpath = "//a[normalize-space(text())='My Claims']")
