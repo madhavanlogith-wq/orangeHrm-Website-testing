@@ -17,31 +17,31 @@ Feature: Leave Module
 
     When navigate to leave module for  apply
     And click on Apply
-    And select Leave Type "CAN - FMLA"
-    And select From Date "2026-05-05"
-    And select To Date "2026-05-06"
-    And select Partial Date "Start Day Only"
-    And select Start Day "Half Day - Afternoon"
-    And enter Comments "Family vacation"
+    And select Leave Type 
+    And select From Date 
+    And select To Date 
+    And select Partial Date 
+    And select Start Day 
+    And enter Comments 
     And click on Apply button
     Then verify success message "Leave request successfully submitted"
     
-  @Login_as_employee
-  Scenario: Apply Leave
+    @Login_as_employee
+    Scenario: Apply Leave
 
     When navigate to leave module for  apply
     And click on Apply
-    And select Leave Type "CAN - FMLA"
-    And select From Date "2026-05-05"
-    And select To Date "2026-05-06"
-    And select Partial Date "Start Day Only"
-    And select Start Day "Half Day - Afternoon"
-    And enter Comments "Family vacation"
+    And select Leave Type 
+    And select From Date 
+    And select To Date 
+    And select Partial Date 
+    And select Start Day 
+    And enter Comments 
     And click on Apply button
     But failed message "failed submition"
     
- @Login_as_employee
-Scenario: My Leave
+    @Login_as_employee
+    Scenario: My Leave
 
 When navigate to leave module for myleave
 When click on My Leave 
@@ -93,7 +93,7 @@ Then filtered succesfully "user name"
     Then verify leave records matching all selected filters are displayed on the leave list "user  name"
     
     
-   @Admin
+  @Admin
 Scenario Outline: HR/Manager assigns leave to employee with valid data
 
     When navigate to Leave module to perform assign leave
