@@ -40,16 +40,24 @@ Feature: Leave Module
     And click on Apply button
     But failed message "failed submition"
     
-    @Login_as_employee
-    Scenario: My Leave
-    
-    When navigate to leave module for myleave
-    When click on My Leave 
-    And select Myleave From Date "2026-05-05" 
-    And select Myleave To Date "2026-05-06"
-    And select my Leave Type "CAN - FMLA"
-    And click on myleave search button
-    Then filtered succesfully "user  name" 
+ @Login_as_employee
+Scenario: My Leave
+
+When navigate to leave module for myleave
+When click on My Leave 
+
+And select Myleave From Date
+  | 2026-05-05 |
+
+And select Myleave To Date
+  | 2026-05-06 |
+
+And select my Leave Type
+  | CAN - FMLA |
+
+And click on myleave search button
+
+Then filtered succesfully "user name"
    
   
     @Login_as_employee

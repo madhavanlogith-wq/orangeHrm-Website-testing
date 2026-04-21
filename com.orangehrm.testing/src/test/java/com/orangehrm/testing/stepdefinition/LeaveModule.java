@@ -1,6 +1,7 @@
 package com.orangehrm.testing.stepdefinition;
 
 import com.orangehrm.seleniumuiframwork_genricutility.Base;
+
 import com.orangehrm.seleniumuiframwork_genricutility.Pages;
 
 import io.cucumber.java.en.Then;
@@ -79,19 +80,22 @@ public class LeaveModule {
         pages.leavepage.getMyLeaveBtn().click();
     }
 
-    @When("select Myleave From Date {string}")
-    public void select_myleave_from_date(String fromDate) {
+    @When("select Myleave From Date")
+    public void select_myleave_from_date(io.cucumber.datatable.DataTable table) {
+        String fromDate = table.cell(0, 0);
         pages.myleave.enterFromDate(Base.getDriver(), fromDate);
     }
-
-    @When("select Myleave To Date {string}")
-    public void select_myleave_to_date(String toDate) {
-        pages.myleave.enterToDate(Base.getDriver(), toDate);
+    
+    @When("select Myleave To Date")
+    public void select_myleave_to_date(io.cucumber.datatable.DataTable table) {
+        String toDate = table.cell(0, 0);
+        pages.myleave.enterToDate(Base.getDriver(),toDate);
     }
-
-    @When("select my Leave Type {string}")
-    public void select_my_leave_type(String leaveType) {
-        pages.myleave.selectLeaveType(Base.getDriver(), leaveType);
+    
+    @When("select my Leave Type")
+    public void select_my_leave_type(io.cucumber.datatable.DataTable table) {
+        String leaveType = table.cell(0, 0);
+        pages.myleave.selectLeaveType(Base.getDriver(),leaveType);
     }
 
     @When("click on myleave search button")
