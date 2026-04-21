@@ -6,10 +6,10 @@ Background:
   @Admin
   Scenario: Add employee with valid details
     Given user clicks on Add Employee button
-    When user enters first name "Amirtha"
-    And user enters middle name "Amirtha"
-    And user enters last name "Amirtha"
-    And user enters employee id "434"
+    When user enters first name "Amirtha1"
+    And user enters middle name "Amirtha1"
+    And user enters last name "Amirtha1"
+    And user enters employee id "435"
     And user clicks on Save button
     Then system should display message "Successfully Saved"
 
