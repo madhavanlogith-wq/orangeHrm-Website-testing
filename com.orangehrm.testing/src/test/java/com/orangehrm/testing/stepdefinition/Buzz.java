@@ -1,20 +1,21 @@
 package com.orangehrm.testing.stepdefinition;
 
 import io.cucumber.java.en.*;
-import org.openqa.selenium.WebDriver;
+
 import org.testng.Assert;
 
-import com.orangeHRM.seleniumuiframwork_genricutility.Pages;
+import com.orangehrm.seleniumuiframwork_genricutility.Base;
+import com.orangehrm.seleniumuiframwork_genricutility.Pages;
+
 
 public class Buzz {
 
-    WebDriver driver;
-    Pages pages;
+	 private Pages pages;
 
-    public Buzz() {
-        this.driver = Hook.getDriver();
-        this.pages = new Pages(driver);
-    }
+	    // ✅ Initialize Pages using ThreadLocal driver
+	    public Buzz() {
+	        this.pages = new Pages(Base.getDriver());
+	    }
 
     @Given("user is logged into the application")
     public void user_is_logged_into_the_application() {
@@ -27,7 +28,7 @@ public class Buzz {
     }
 
     @When("user enters {string}")
-    public void user_enters(String text) {
+    public void usser_enters(String text) {
         pages.post.enterText(text);
     }
 

@@ -1,5 +1,6 @@
 Feature: My Info - Personal Details
 
+  @Admin
   Scenario: Update personal details successfully
     Given user is logged in and navigates to My Info page
     When user updates first name and last name
@@ -7,15 +8,15 @@ Feature: My Info - Personal Details
     And user clicks save button
     Then personal details should be saved successfully
 
-
+  @Admin
   Scenario: Update contact details successfully
     Given user is logged in and navigates to My Info page
     When user navigates to Contact Details tab
     And user enters street address, city, mobile and work email
     And user clicks save button in contact details
     Then contact details should be saved successfully
-
-
+    
+  @Admin
   Scenario: Add emergency contact successfully
     Given user is logged in and navigates to My Info page
     When user navigates to Emergency Contacts tab
@@ -23,8 +24,8 @@ Feature: My Info - Personal Details
     And user enters name, relationship and mobile
     And user clicks save button in emergency contacts
     Then emergency contact should be saved successfully
-
-
+    
+  @Admin
   Scenario: Add dependent successfully
     Given user is logged in and navigates to My Info page
     When user navigates to Dependents tab
@@ -33,7 +34,7 @@ Feature: My Info - Personal Details
     And user clicks save button in dependents
     Then dependent should be saved successfully
 
-
+  @Admin
   Scenario: Add work experience in qualifications successfully
     Given user is logged in and navigates to My Info page
     When user navigates to Qualifications tab
@@ -44,7 +45,8 @@ Feature: My Info - Personal Details
 
 
   # NEGATIVE SCENARIO
-
+  
+  @Admin
   Scenario: Validation when first name is empty
     Given user is logged in and navigates to My Info page
     When user clears first name field

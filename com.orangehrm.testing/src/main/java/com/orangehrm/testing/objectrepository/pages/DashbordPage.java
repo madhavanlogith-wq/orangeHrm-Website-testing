@@ -29,7 +29,7 @@ public class DashbordPage extends Base{
 	@FindBy(linkText="Recruitment")
 	private WebElement recrutmentLink;
 
-	@FindBy(linkText="PIM")
+	@FindBy(linkText="Leave")
 	private WebElement leaveLink;
 	
 	@FindBy(linkText="Admin")
