@@ -57,7 +57,6 @@ public class MyInfoSteps {
        pages.personalDetailsPage.selectMaritalStatus(driver, martialStatus);
     }
 
-<<<<<<< HEAD
 //    @When("user clicks nationality and marital status dropdown")
 //    public void user_clicks_nationality_and_marital_status_dropdown() {
 //
@@ -70,26 +69,7 @@ public class MyInfoSteps {
 //        )).click();
 //    }
     
-    @When("user clicks nationality and marital status dropdown")
-    public void user_clicks_nationality_and_marital_status_dropdown() {
 
-        // Wait for loader to disappear
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(
-                org.openqa.selenium.By.className("oxd-form-loader")
-        ));
-
-        // Click nationality
-        wait.until(ExpectedConditions.elementToBeClickable(
-                pages.personalDetailsPage.getNationalityDropdown()
-        )).click();
-
-        // Click marital status
-        wait.until(ExpectedConditions.elementToBeClickable(
-                pages.personalDetailsPage.getMaritalStatusDropdown()
-        )).click();
-    }
-=======
->>>>>>> origin/main
 
     @When("user clicks save button")
     public void user_clicks_save_button() {
