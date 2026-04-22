@@ -33,7 +33,7 @@ public class RecruitmentSteps {
     //  Load Excel Data Before Scenario
     @Before
     public void loadExcelData() {
-        Object[][] data = AllUtilityFunction.getData("Candidate Data");
+        Object[][] data = AllUtilityFunction.getData("CandidateData");
 
         FirstName = data[0][0].toString();
         LastName  = data[0][1].toString();

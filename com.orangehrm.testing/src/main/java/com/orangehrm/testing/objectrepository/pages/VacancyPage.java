@@ -96,8 +96,8 @@ public class VacancyPage {
 
 	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-	    // ✅ correct validation
-	    wait.until(ExpectedConditions.urlMatches(".*addJobVacancy/\\d+"));
+	    // ✅ Correct condition
+	    wait.until(ExpectedConditions.urlContains("viewJobVacancy"));
 
 	    return driver.getCurrentUrl();
 	}

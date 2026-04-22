@@ -21,7 +21,7 @@ Scenario: Add candidate with valid mandatory details
     And User enters vacancy details
       | VacancyName   | Tim    |
       | JobTitle      | Account Assistant |
-      | HiringManager |Rahul Das |
+      | HiringManager |Barbara Brenda Graves |
     And User clicks Save button
     Then Vacancy should be created successfully
 

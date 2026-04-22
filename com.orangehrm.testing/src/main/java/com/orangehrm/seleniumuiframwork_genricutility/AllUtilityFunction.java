@@ -146,7 +146,7 @@ public class AllUtilityFunction {
 		public static Object[][] getData(String sheetName) {
 
 	        try {
-	            FileInputStream fis = new FileInputStream("./src/test/resources/locationData.xlsx");
+	            FileInputStream fis = new FileInputStream("./src/test/resources/locationData.xlsx");//./src/test/resources/locationData.xlsx
 	            Workbook wb = WorkbookFactory.create(fis);
 	            Sheet sheet = wb.getSheet(sheetName);
 
