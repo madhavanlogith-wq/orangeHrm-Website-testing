@@ -1,271 +1,189 @@
 package com.orangehrm.testing.stepdefinition;
 
-import io.cucumber.java.en.*;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import java.util.List;
+import java.util.Map;
+
+import org.testng.Assert;
 
 import com.orangehrm.seleniumuiframwork_genricutility.Base;
 import com.orangehrm.seleniumuiframwork_genricutility.Pages;
+import com.orangehrm.seleniumuiframwork_genricutility.AllUtilityFunction;
 
-import java.time.Duration;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.*;
 
 public class MyInfoSteps {
 
-    private WebDriver driver;
-    private WebDriverWait wait;
-
-    // ✅ NEW: Pages object (like Buzz class)
     private Pages pages;
 
-    // ✅ Initialize Pages using ThreadLocal driver
     public MyInfoSteps() {
-        this.driver = Base.getDriver();
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-
-        this.pages = new Pages(Base.getDriver());   // 🔥 IMPORTANT CHANGE
+        pages = new Pages(Base.getDriver());
     }
+
+    // ================= NAVIGATION =================
 
     @Given("user is logged in and navigates to My Info page")
     public void user_is_logged_in_and_navigates_to_my_info_page() {
-
-        wait.until(ExpectedConditions.elementToBeClickable(
-                org.openqa.selenium.By.xpath("//span[text()='My Info']")
-        )).click();
-
-        wait.until(ExpectedConditions.visibilityOf(
-                pages.personalDetailsPage.getFirstName()
-        ));
+        pages.personalDetailsPage.setMyInfoMenu();
     }
 
-    @When("user updates first name and last name")
-    public void user_updates_first_name_and_last_name() {
+    // ================= PERSONAL DETAILS =================
 
-        pages.personalDetailsPage.enterFirstName("Deebiga");
-        pages.personalDetailsPage.enterLastName("RK");
+    @When("user updates personal details {string} {string}")
+    public void user_updates_personal_details(String fname, String lname) {
+        pages.personalDetailsPage.name_first_last(fname, lname);
     }
 
-    @When("user clicks nationality and marital status dropdown")
-    public void user_clicks_nationality_and_marital_status_dropdown() {
-
-        wait.until(ExpectedConditions.elementToBeClickable(
-                pages.personalDetailsPage.getNationalityDropdown()
-        )).click();
-
-        wait.until(ExpectedConditions.elementToBeClickable(
-                pages.personalDetailsPage.getMaritalStatusDropdown()
-        )).click();
+    @When("user selects nationality and marital status")
+    public void user_selects_nationality_and_marital_status() {
+        pages.personalDetailsPage.setNationalityDropdown();
+        pages.personalDetailsPage.setMaritalStatusDropdown();
     }
 
     @When("user clicks save button")
     public void user_clicks_save_button() {
-
-        wait.until(ExpectedConditions.elementToBeClickable(
-                pages.personalDetailsPage.getSaveButton()
-        )).click();
+        pages.personalDetailsPage.setSaveButton();
     }
 
     @Then("personal details should be saved successfully")
     public void personal_details_should_be_saved_successfully() {
-        System.out.println("Personal Details Updated Successfully");
+        String value = pages.personalDetailsPage.getFirstName().getAttribute("value");
+        Assert.assertTrue(value.length() > 0);
     }
 
-    // CONTACT
+    // ================= CONTACT DETAILS (DATATABLE) =================
+
     @When("user navigates to Contact Details tab")
     public void user_navigates_to_contact_details_tab() {
-
-        wait.until(ExpectedConditions.elementToBeClickable(
-                org.openqa.selenium.By.xpath("//a[text()='Contact Details']")
-        )).click();
-
-        wait.until(ExpectedConditions.visibilityOf(
-                pages.contactDetailsPage.getStreet1()
-        ));
+        pages.personalDetailsPage.setContactDetailsTab();
     }
 
-    @When("user enters street address, city, mobile and work email")
-    public void user_enters_street_address_city_mobile_and_work_email() {
+    @When("user enters contact details")
+    public void user_enters_contact_details(DataTable table) {
 
-        pages.contactDetailsPage.enterStreet1("Chennai Street");
-        pages.contactDetailsPage.enterCity("Chennai");
-        pages.contactDetailsPage.enterMobile("9876543210");
-        pages.contactDetailsPage.enterWorkEmail("deebiga@test.com");
+        List<Map<String, String>> data = table.asMaps(String.class, String.class);
+
+        pages.contactDetailsPage.enterStreet1(data.get(0).get("street"));
+        pages.contactDetailsPage.enterCity(data.get(0).get("city"));
+        pages.contactDetailsPage.enterMobile(data.get(0).get("mobile"));
     }
 
     @When("user clicks save button in contact details")
     public void user_clicks_save_button_in_contact_details() {
-
-        wait.until(ExpectedConditions.elementToBeClickable(
-                pages.contactDetailsPage.getSaveButton()
-        )).click();
+    
+        pages.contactDetailsPage.clickSaveButton();
     }
 
+//    @Then("contact details should be saved successfully")
+//    public void contact_details_should_be_saved_successfully() {
+//        String city = pages.contactDetailsPage.getCity().getAttribute("value");
+//        Assert.assertTrue(city.length() > 0);
+//    }
     @Then("contact details should be saved successfully")
     public void contact_details_should_be_saved_successfully() {
-        System.out.println("Contact Details Updated Successfully");
+
+        String actualMsg = pages.contactDetailsPage.getToastMessageText();
+
+        Assert.assertEquals(actualMsg, "Success");
     }
 
-    // NEGATIVE
+    // ================= EXCEL =================
+
+    @When("user updates personal details from excel {string} row {int}")
+    public void user_updates_personal_details_from_excel(String sheetName, Integer row) {
+
+        Object[][] data = AllUtilityFunction.getData(sheetName);
+
+        String fname = data[row][0].toString();
+        String lname = data[row][1].toString();
+
+        pages.personalDetailsPage.setFirstName(fname);
+        pages.personalDetailsPage.setLastName(lname);
+    }
+
+    // ================= EMERGENCY CONTACT =================
+
+    @When("user navigates to Emergency Contacts tab")
+    public void user_navigates_to_emergency_contacts_tab() {
+        pages.personalDetailsPage.setEmergencyContactsTab();
+    }
+
+    @When("user clicks add button in emergency contacts")
+    public void user_clicks_add_button_in_emergency_contacts() {
+        pages.emergencyContactsPage.clickAddButton();
+    }
+
+    @When("user enters name {string} relationship {string} and mobile {string}")
+    public void user_enters_name_relationship_and_mobile(String name, String relation, String mobile) {
+        pages.emergencyContactsPage.enterName(name);
+        pages.emergencyContactsPage.enterRelationship(relation);
+        pages.emergencyContactsPage.enterMobile(mobile);
+    }
+
+    @When("user clicks save button in emergency contacts")
+    public void user_clicks_save_button_in_emergency_contacts() {
+        pages.emergencyContactsPage.clickSaveButton();
+    }
+
+    @Then("emergency contact should be saved successfully")
+    public void emergency_contact_should_be_saved_successfully() {
+        String name = pages.emergencyContactsPage.getName().getAttribute("value");
+        Assert.assertTrue(name.length() > 0);
+    }
+
+    // ================= DEPENDENTS =================
+
+    @When("user navigates to Dependents tab")
+    public void user_navigates_to_dependents_tab() {
+        // If you add locator → call here
+    	pages.dependentsPage.setDependentsButton();
+    	
+    }
+
+    @When("user clicks add button in dependents")
+    public void user_clicks_add_button_in_dependents() {
+        pages.dependentsPage.clickAddButton();
+    }
+
+    @When("user enters dependent details")
+    public void user_enters_dependent_details(DataTable table) {
+
+        List<Map<String, String>> data = table.asMaps(String.class, String.class);
+
+        pages.dependentsPage.enterName(data.get(0).get("name"));
+        pages.dependentsPage.selectRelationship(data.get(0).get("relation"));
+    }
+
+    @When("user clicks save button in dependents")
+    public void user_clicks_save_button_in_dependents() {
+        pages.dependentsPage.clickSaveButton();
+    }
+
+    @Then("dependent should be saved successfully")
+    public void dependent_should_be_saved_successfully() {
+        String name = pages.dependentsPage.getName().getAttribute("value");
+        Assert.assertTrue(name.length() > 0);
+    }
+
+    // ================= NEGATIVE =================
+
+//    @When("user clears first name field")
+//    public void user_clears_first_name_field() {
+//        pages.personalDetailsPage.getFirstName().clear();
+//    }
+    
     @When("user clears first name field")
     public void user_clears_first_name_field() {
-
-        pages.personalDetailsPage.getFirstName().click();
-        pages.personalDetailsPage.getFirstName().sendKeys(Keys.CONTROL + "a");
-        pages.personalDetailsPage.getFirstName().sendKeys(Keys.DELETE);
-    }
-
-    @When("user enters only last name")
-    public void user_enters_only_last_name() {
-
-        pages.personalDetailsPage.enterLastName("TestLast");
+        pages.personalDetailsPage.clearFirstName();
     }
 
     @Then("first name field should show required validation")
     public void first_name_field_should_show_required_validation() {
 
-        wait.until(ExpectedConditions.attributeContains(
-                pages.personalDetailsPage.getFirstName(),
-                "class",
-                "error"
-        ));
+        boolean error = pages.personalDetailsPage.isFirstNameErrorDisplayed();
 
-        System.out.println("Required validation displayed for First Name");
+        Assert.assertTrue(error);
     }
     
-    // ================= EMERGENCY CONTACT =================
-
-    @When("user navigates to Emergency Contacts tab")
-    public void user_navigates_to_emergency_contacts_tab() {
-
-        wait.until(ExpectedConditions.elementToBeClickable(
-                org.openqa.selenium.By.xpath("//a[text()='Emergency Contacts']")
-        )).click();
-
-        wait.until(ExpectedConditions.visibilityOf(
-                pages.emergencyContactsPage.getAddButton()
-        ));
-    }
-
-    @When("user enters name, relationship and mobile")
-    public void user_enters_name_relationship_and_mobile() {
-
-        pages.emergencyContactsPage.enterName("John Doe");
-        pages.emergencyContactsPage.enterRelationship("Brother");
-        pages.emergencyContactsPage.enterMobile("9876543210");
-    }
-
-    @When("user clicks save button in emergency contacts")
-    public void user_clicks_save_button_in_emergency_contacts() {
-
-        wait.until(ExpectedConditions.elementToBeClickable(
-                pages.emergencyContactsPage.getSaveButton()
-        )).click();
-    }
-
-    @Then("emergency contact should be saved successfully")
-    public void emergency_contact_should_be_saved_successfully() {
-
-////        String msg = pages.emergencyContactsPage
-//
-//        if (msg != null && msg.toLowerCase().contains("success")) {
-//            System.out.println("Emergency Contact Saved Successfully");
-//        } else {
-//            throw new AssertionError("Emergency Contact not saved. Message: " + msg);
-//        }
-    }
-    
-    // ================= DEPENDENTS =================
-
-    @When("user navigates to Dependents tab")
-    public void user_navigates_to_dependents_tab() {
-
-        wait.until(ExpectedConditions.elementToBeClickable(
-                org.openqa.selenium.By.xpath("//a[text()='Dependents']")
-        )).click();
-
-        wait.until(ExpectedConditions.visibilityOf(
-                pages.dependentsPage.getAddButton()
-        ));
-    }
-
-    @When("user clicks add button in dependents")
-    public void user_clicks_add_button_in_dependents() {
-
-        pages.dependentsPage.clickAddButton();
-    }
-
-    @When("user enters dependent name and selects relationship")
-    public void user_enters_dependent_name_and_selects_relationship() {
-
-        pages.dependentsPage.enterName("Rahul Kumar");
-        pages.dependentsPage.selectRelationship("Child");
-    }
-
-    @When("user clicks save button in dependents")
-    public void user_clicks_save_button_in_dependents() {
-
-        wait.until(ExpectedConditions.elementToBeClickable(
-                pages.dependentsPage.getSaveButton()
-        )).click();
-    }
-
-    @Then("dependent should be saved successfully")
-    public void dependent_should_be_saved_successfully() {
-
-//        String msg = pages.dependentsPage.getSuccessMessage();
-//
-//        if (msg != null && msg.toLowerCase().contains("success")) {
-//            System.out.println("Dependent saved successfully");
-//        } else {
-//            throw new AssertionError("Dependent not saved. Message: " + msg);
-//        }
-    }
-    
-    // ================= QUALIFICATIONS (WORK EXPERIENCE) =================
-
-    @When("user navigates to Qualifications tab")
-    public void user_navigates_to_qualifications_tab() {
-
-        wait.until(ExpectedConditions.elementToBeClickable(
-                org.openqa.selenium.By.xpath("//a[text()='Qualifications']")
-        )).click();
-
-        wait.until(ExpectedConditions.visibilityOf(
-                pages.qualificationsPage.getAddButton()
-        ));
-    }
-
-    @When("user clicks add button in qualifications")
-    public void user_clicks_add_button_in_qualifications() {
-
-        pages.qualificationsPage.clickAddButton();
-    }
-
-    @When("user enters company and job title")
-    public void user_enters_company_and_job_title() {
-
-        pages.qualificationsPage.enterCompany("TCS");
-        pages.qualificationsPage.enterJobTitle("Software Engineer");
-    }
-
-    @When("user clicks save button in qualifications")
-    public void user_clicks_save_button_in_qualifications() {
-
-        wait.until(ExpectedConditions.elementToBeClickable(
-                pages.qualificationsPage.getSaveButton()
-        )).click();
-    }
-
-    @Then("work experience should be saved successfully")
-    public void work_experience_should_be_saved_successfully() {
-
-//        String msg = pages.qualificationsPage.getSuccessMessage();
-//
-//        if (msg != null && msg.toLowerCase().contains("success")) {
-//            System.out.println("Work Experience saved successfully");
-//        } else {
-//            throw new AssertionError("Work Experience not saved. Message: " + msg);
-//        }
-    }
 }
+   

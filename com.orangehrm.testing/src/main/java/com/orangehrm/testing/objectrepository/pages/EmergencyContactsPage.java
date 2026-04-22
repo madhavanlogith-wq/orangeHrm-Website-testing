@@ -3,6 +3,7 @@ package com.orangehrm.testing.objectrepository.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class EmergencyContactsPage {
 
@@ -11,7 +12,9 @@ public class EmergencyContactsPage {
     // Constructor
     public EmergencyContactsPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this); // 🔥 MUST ADD
     }
+
 
     // ================= LOCATORS =================
 

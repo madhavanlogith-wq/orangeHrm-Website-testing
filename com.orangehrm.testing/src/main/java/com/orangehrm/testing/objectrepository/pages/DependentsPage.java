@@ -17,8 +17,22 @@ public class DependentsPage {
     }
 
     // ================= LOCATORS =================
+    
+    
 
     // Add Button
+    @FindBy(linkText = "Dependents")
+    private WebElement DependentsButton;
+    
+    public WebElement getDependentsButton() {
+		return DependentsButton;
+	}
+
+	public void setDependentsButton() {
+		getDependentsButton().click();
+	}
+
+	// Add Button
     @FindBy(xpath = "//button[normalize-space()='Add']")
     private WebElement addButton;
 
@@ -45,11 +59,11 @@ public class DependentsPage {
         name.sendKeys(value);
     }
 
-    // 🔥 Dropdown Handling (IMPORTANT)
-    public void selectRelationship(String relation) {
-        relationshipDropdown.click();
-        driver.findElement(By.xpath("//span[text()='" + relation + "']")).click();
-    }
+//    // 🔥 Dropdown Handling (IMPORTANT)
+//    public void selectRelationship(String relation) {
+//        relationshipDropdown.click();
+//        driver.findElement(By.xpath("//span[text()='" + relation + "']")).click();
+//    }
 
     public void clickSaveButton() {
         saveButton.click();
@@ -71,5 +85,9 @@ public class DependentsPage {
 
     public WebElement getSaveButton() {
         return saveButton;
+    }
+    public void selectRelationship(String relation) {
+        getRelationshipDropdown().click();
+        driver.findElement(By.xpath("//span[text()='" + relation + "']")).click();
     }
 }

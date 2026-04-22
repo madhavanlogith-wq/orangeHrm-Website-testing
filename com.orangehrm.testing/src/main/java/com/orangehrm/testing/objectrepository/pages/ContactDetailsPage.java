@@ -1,9 +1,13 @@
 package com.orangehrm.testing.objectrepository.pages;
 
+import java.time.Duration;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ContactDetailsPage {
 
@@ -34,12 +38,25 @@ public class ContactDetailsPage {
     private WebElement workEmail;
 
     // Save Button (Best Locator)
-    @FindBy(xpath = "//button[contains(@class,'oxd-button--secondary') and @type='submit']")
+    @FindBy(css = "[type='submit']")
     private WebElement saveButton;
+    
+    @FindBy(xpath = "//p[.='Success']")
+    private WebElement toastMessage;
 
     // ================= GETTERS =================
 
-    public WebElement getStreet1() {
+    public WebElement getToastMessage() {
+		return toastMessage;
+	}
+    public String getToastMessageText() {
+
+        return new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOf(toastMessage))
+                .getText();
+    }
+
+	public WebElement getStreet1() {
         return street1;
     }
 
@@ -84,4 +101,11 @@ public class ContactDetailsPage {
     public void clickSaveButton() {
         getSaveButton().click();
     }
+   
+//    public void clickSaveButton() {
+//
+//        new WebDriverWait(driver, Duration.ofSeconds(10))
+//                .until(ExpectedConditions.elementToBeClickable(getSaveButton()))
+//                .click();
+//    }
 }
