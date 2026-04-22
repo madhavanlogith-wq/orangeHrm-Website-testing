@@ -74,6 +74,7 @@ public class Claim {
 
     // ================= MY CLAIMS =================
 
+    
     @When("user navigates to Claim module")
     public void user_navigates_to_claim_module() {
         pages.submit_Claim.openClaimModule();
