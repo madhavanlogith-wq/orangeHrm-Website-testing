@@ -82,20 +82,20 @@ public class Claim {
     }
 
     // ================= MY CLAIMS =================
-
-<<<<<<< HEAD
-    //  Excel Data Variables
-    String reference_ID;
+    
+//  Excel Data Variables
+    String ref_ID;
 
     //  Load Excel Data Before Scenario
     @Before
     public void loadExcelData() {
         Object[][] data = AllUtilityFunction.getData("Claim");
 
-        reference_ID = data[0][0].toString();
+        ref_ID = data[0][0].toString();
+       
     }
-=======
->>>>>>> origin/main
+
+
     
     @When("user navigates to Claim module")
     public void user_navigates_to_claim_module() {
@@ -109,7 +109,7 @@ public class Claim {
     
     @When("user enters reference ID")
     public void user_enters_reference_id() {
-    	getPages().my_claims.enterReferenceId(reference_ID);
+        getPages().my_claims.enterReferenceId(ref_ID);
     }
     
 

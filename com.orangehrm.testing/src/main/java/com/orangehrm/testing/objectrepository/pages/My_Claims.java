@@ -53,7 +53,7 @@ public class My_Claims {
     }
 
     public void clickView() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         By viewBtn = By.xpath("//button[contains(@class,'oxd-table-cell-action-space')]");
 
