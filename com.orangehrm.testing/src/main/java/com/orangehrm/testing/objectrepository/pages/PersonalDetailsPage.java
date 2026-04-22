@@ -1,5 +1,7 @@
 package com.orangehrm.testing.objectrepository.pages;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,22 +9,15 @@ import org.openqa.selenium.support.PageFactory;
 
 public class PersonalDetailsPage {
 
-    WebDriver driver;
-
-    // Constructor
-    public PersonalDetailsPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
-
+  
     // ================= LOCATORS =================
 
     // First Name
-    @FindBy(name = "firstName")
+    @FindBy(xpath ="//input[@name='firstName']")
     private WebElement firstName;
 
 	// Last Name
-    @FindBy(name = "lastName")
+    @FindBy(xpath = "//input[@name='lastName']")
     private WebElement lastName;
 
     // Nationality Dropdown
@@ -38,9 +33,6 @@ public class PersonalDetailsPage {
     private WebElement saveButton;
 
 
-    public WebDriver getDriver() {
-		return driver;
-	}
 
 	public WebElement getFirstName() {
 		return firstName;
@@ -61,27 +53,45 @@ public class PersonalDetailsPage {
 	public WebElement getSaveButton() {
 		return saveButton;
 	}
-    // ================= ACTION METHODS =================
+	// ================= ACTION METHODS =================
 
-    public void enterFirstName(String fname) {
-        getFirstName().clear();
-        getFirstName().sendKeys(fname);
-    }
+	public void enterFirstName(String fname) {
+	    WebElement ele = getFirstName();
+	    ele.click();
+	    ele.sendKeys(Keys.CONTROL + "a");
+	    ele.sendKeys(Keys.DELETE);
+	    ele.sendKeys(fname);
+	    ele.sendKeys(Keys.TAB);
+	}
 
-    public void enterLastName(String lname) {
-    	getLastName().clear();
-    	getLastName().sendKeys(lname);
-    }
+	public void enterLastName(String lname) {
+	    WebElement ele = getLastName();
+	    ele.click();
+	    ele.sendKeys(Keys.CONTROL + "a");
+	    ele.sendKeys(Keys.DELETE);
+	    ele.sendKeys(lname);
+	    ele.sendKeys(Keys.TAB);
+	}
 
-    public void clickNationalityDropdown() {
-    	getNationalityDropdown().click();
-    }
+	public void selectNationality(WebDriver driver, String nationality) {
+	    getNationalityDropdown().click();
 
-    public void clickMaritalStatusDropdown() {
-    	getMaritalStatusDropdown().click();
-    }
+	    WebElement option = driver.findElement(
+	        By.xpath("//span[contains(text(),'" + nationality + "')]")
+	    );
+	    option.click();
+	}
 
-    public void clickSaveButton() {
-    	getSaveButton().click();
-    }
+	public void selectMaritalStatus(WebDriver driver, String maritalStatus) {
+	    getMaritalStatusDropdown().click();
+
+	    WebElement option = driver.findElement(
+	        By.xpath("//span[contains(text(),'" + maritalStatus + "')]")
+	    );
+	    option.click();
+	}
+
+	public void clickSaveButton() {
+	    getSaveButton().click();
+	}
 }

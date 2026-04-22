@@ -3,8 +3,9 @@ Feature: My Info - Personal Details
   @Admin
   Scenario: Update personal details successfully
     Given user is logged in and navigates to My Info page
-    When user updates first name and last name
-    And user clicks nationality and marital status dropdown
+    When user updates the first name "Deebiga"
+    And user updates the last name "RK"
+    And user clicks the nationality "Af" and marital status dropdown "Sin" myInfo
     And user clicks save button
     Then personal details should be saved successfully
 
