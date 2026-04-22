@@ -83,6 +83,7 @@ public class Claim {
 
     // ================= MY CLAIMS =================
 
+<<<<<<< HEAD
     //  Excel Data Variables
     String reference_ID;
 
@@ -93,6 +94,8 @@ public class Claim {
 
         reference_ID = data[0][0].toString();
     }
+=======
+>>>>>>> origin/main
     
     @When("user navigates to Claim module")
     public void user_navigates_to_claim_module() {
