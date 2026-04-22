@@ -34,8 +34,15 @@ public class PersonalDetailsPage {
     private WebElement maritalStatusDropdown;
 
     // Save Button
-    @FindBy(xpath = "//button[@type='submit']")
+    @FindBy(xpath = "//button[@class='oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space']")
     private WebElement saveButton;
+    
+    @FindBy(xpath ="(//p[contains(@class,'oxd-toast-content-text') and contains(text(),'Success')])")
+    private WebElement successMessage;
+
+    public WebElement getSuccessMessageElement() {
+        return successMessage;
+    }
 
 
     public WebDriver getDriver() {

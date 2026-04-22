@@ -20,7 +20,7 @@ Feature: My Info - Personal Details
   Scenario: Add emergency contact successfully
     Given user is logged in and navigates to My Info page
     When user navigates to Emergency Contacts tab
-    And user clicks add button
+    When user clicks add button in emergency contacts
     And user enters name, relationship and mobile
     And user clicks save button in emergency contacts
     Then emergency contact should be saved successfully
@@ -46,11 +46,18 @@ Feature: My Info - Personal Details
 
   # NEGATIVE SCENARIO
   
-  @Admin
-  Scenario: Validation when first name is empty
-    Given user is logged in and navigates to My Info page
-    When user clears first name field
-    And user enters only last name
-    And user clicks save button
-    Then first name field should show required validation
+  #@Admin
+  #Scenario: Validation when first name is empty
+   # Given user is logged in and navigates to My Info page
+   # When user clears first name field
+    #And user enters only last name
+    #And user clicks save button
+    #Then first name field should show required validation
     
+    
+    @Admin
+Scenario: Validation when first name is empty
+  Given user is logged in and navigates to My Info page
+  When user clears first name field
+  And user clicks save button
+  Then first name field should show required validation

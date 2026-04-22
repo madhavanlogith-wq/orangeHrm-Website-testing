@@ -1,11 +1,13 @@
 package com.orangehrm.testing.stepdefinition;
 
+
 import io.cucumber.java.en.*;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import org.testng.Assert;
 import com.orangehrm.seleniumuiframwork_genricutility.Base;
 import com.orangehrm.seleniumuiframwork_genricutility.Pages;
 
@@ -46,13 +48,32 @@ public class MyInfoSteps {
         pages.personalDetailsPage.enterLastName("RK");
     }
 
+//    @When("user clicks nationality and marital status dropdown")
+//    public void user_clicks_nationality_and_marital_status_dropdown() {
+//
+//        wait.until(ExpectedConditions.elementToBeClickable(
+//                pages.personalDetailsPage.getNationalityDropdown()
+//        )).click();
+//
+//        wait.until(ExpectedConditions.elementToBeClickable(
+//                pages.personalDetailsPage.getMaritalStatusDropdown()
+//        )).click();
+//    }
+    
     @When("user clicks nationality and marital status dropdown")
     public void user_clicks_nationality_and_marital_status_dropdown() {
 
+        // Wait for loader to disappear
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(
+                org.openqa.selenium.By.className("oxd-form-loader")
+        ));
+
+        // Click nationality
         wait.until(ExpectedConditions.elementToBeClickable(
                 pages.personalDetailsPage.getNationalityDropdown()
         )).click();
 
+        // Click marital status
         wait.until(ExpectedConditions.elementToBeClickable(
                 pages.personalDetailsPage.getMaritalStatusDropdown()
         )).click();
@@ -68,7 +89,13 @@ public class MyInfoSteps {
 
     @Then("personal details should be saved successfully")
     public void personal_details_should_be_saved_successfully() {
-        System.out.println("Personal Details Updated Successfully");
+
+        String msg = wait.until(ExpectedConditions.visibilityOf(
+                pages.personalDetailsPage.getSuccessMessageElement()
+        )).getText();
+
+        Assert.assertTrue(msg.toLowerCase().contains("success"),
+                "Personal Details not saved: " + msg);
     }
 
     // CONTACT
@@ -78,6 +105,11 @@ public class MyInfoSteps {
         wait.until(ExpectedConditions.elementToBeClickable(
                 org.openqa.selenium.By.xpath("//a[text()='Contact Details']")
         )).click();
+
+        // 🔥 WAIT FOR LOADER
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(
+                org.openqa.selenium.By.className("oxd-form-loader")
+        ));
 
         wait.until(ExpectedConditions.visibilityOf(
                 pages.contactDetailsPage.getStreet1()
@@ -96,6 +128,12 @@ public class MyInfoSteps {
     @When("user clicks save button in contact details")
     public void user_clicks_save_button_in_contact_details() {
 
+        // 🔥 Wait for loader to disappear
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(
+                org.openqa.selenium.By.className("oxd-form-loader")
+        ));
+
+        // Click save
         wait.until(ExpectedConditions.elementToBeClickable(
                 pages.contactDetailsPage.getSaveButton()
         )).click();
@@ -103,8 +141,25 @@ public class MyInfoSteps {
 
     @Then("contact details should be saved successfully")
     public void contact_details_should_be_saved_successfully() {
-        System.out.println("Contact Details Updated Successfully");
+
+        // 🔥 Wait for loader to disappear (VERY IMPORTANT)
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(
+                org.openqa.selenium.By.className("oxd-form-loader")
+        ));
+
+        // 🔥 Capture toast using presence (fast + reliable)
+        org.openqa.selenium.By toast = org.openqa.selenium.By.xpath(
+                "//div[contains(@class,'oxd-toast-content')]"
+        );
+
+        String msg = wait.until(ExpectedConditions.presenceOfElementLocated(toast)).getText();
+
+        org.testng.Assert.assertTrue(
+                msg.toLowerCase().contains("success"),
+                "Contact Details not saved: " + msg
+        );
     }
+    
 
     // NEGATIVE
     @When("user clears first name field")
@@ -145,6 +200,15 @@ public class MyInfoSteps {
         wait.until(ExpectedConditions.visibilityOf(
                 pages.emergencyContactsPage.getAddButton()
         ));
+    }
+    @When("user clicks add button in emergency contacts")
+    public void user_clicks_add_button_in_emergency_contacts() {
+
+        wait.until(ExpectedConditions.elementToBeClickable(
+                pages.emergencyContactsPage.getAddButton()
+        ));
+
+        pages.emergencyContactsPage.clickAddButton();
     }
 
     @When("user enters name, relationship and mobile")

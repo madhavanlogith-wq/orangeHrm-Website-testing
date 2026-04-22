@@ -1,5 +1,6 @@
 package com.orangehrm.testing.objectrepository.pages;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,10 +35,22 @@ public class ContactDetailsPage {
     private WebElement workEmail;
 
     // Save Button (Best Locator)
-    @FindBy(xpath = "//button[contains(@class,'oxd-button--secondary') and @type='submit']")
+    @FindBy(xpath = "//button[@type='submit']")
     private WebElement saveButton;
+    
+    @FindBy(xpath ="(//p[contains(@class,'oxd-toast-content-text') and contains(text(),'Success')])")
+    private WebElement successMessage;
+
+   
 
     // ================= GETTERS =================
+    
+    
+    
+    
+    public WebElement getSuccessMessageElement() {
+        return successMessage;
+    }
 
     public WebElement getStreet1() {
         return street1;
@@ -62,23 +75,32 @@ public class ContactDetailsPage {
     // ================= ACTION METHODS =================
 
     public void enterStreet1(String value) {
-        getStreet1().clear();
-        getStreet1().sendKeys(value);
+        street1.click();
+        street1.sendKeys(Keys.CONTROL + "a");
+        street1.sendKeys(Keys.DELETE);
+        street1.sendKeys(value);
     }
 
     public void enterCity(String value) {
-        getCity().clear();
-        getCity().sendKeys(value);
+        city.click();
+        city.sendKeys(Keys.CONTROL + "a");
+        city.sendKeys(Keys.DELETE);
+        city.sendKeys(value);
     }
 
+
     public void enterMobile(String value) {
-        getMobile().clear();
-        getMobile().sendKeys(value);
+        mobile.click();
+        mobile.sendKeys(Keys.CONTROL + "a");
+        mobile.sendKeys(Keys.DELETE);
+        mobile.sendKeys(value);
     }
 
     public void enterWorkEmail(String value) {
-        getWorkEmail().clear();
-        getWorkEmail().sendKeys(value);
+        workEmail.click();
+        workEmail.sendKeys(Keys.CONTROL + "a");
+        workEmail.sendKeys(Keys.DELETE);
+        workEmail.sendKeys(value);
     }
 
     public void clickSaveButton() {
