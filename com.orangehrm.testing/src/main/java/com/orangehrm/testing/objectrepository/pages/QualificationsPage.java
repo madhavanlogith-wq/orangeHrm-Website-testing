@@ -39,15 +39,15 @@ public class QualificationsPage {
         addButton.click();
     }
 
-    public void enterCompany(String value) {
-        company.clear();
-        company.sendKeys(value);
-    }
-
-    public void enterJobTitle(String value) {
-        jobTitle.clear();
-        jobTitle.sendKeys(value);
-    }
+//    public void enterCompany(String value) {
+//        company.clear();
+//        company.sendKeys(value);
+//    }
+//
+//    public void enterJobTitle(String value) {
+//        jobTitle.clear();
+//        jobTitle.sendKeys(value);
+//    }
 
     public void clickSaveButton() {
         saveButton.click();
@@ -69,5 +69,14 @@ public class QualificationsPage {
 
     public WebElement getSaveButton() {
         return saveButton;
+    }
+    public void enterCompany(String value) {
+        getCompany().clear();
+        getCompany().sendKeys(value);
+    }
+
+    public void enterJobTitle(String value) {
+        getJobTitle().clear();
+        getJobTitle().sendKeys(value);
     }
 }
