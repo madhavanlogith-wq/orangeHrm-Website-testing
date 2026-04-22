@@ -60,10 +60,15 @@ public class Hook extends AllUtilityFunction {
     }
 
     // ✅ SCREENSHOT FOR ALL SCENARIOS
-    @After
-    public void afterScenario(Scenario scenario) {
+    @io.cucumber.java.AfterStep
+    public void afterEachStep(Scenario scenario) {
 
-        WebDriver driver = Base.getDriver();   // ✅ ALWAYS get from ThreadLocal
+        // 🛑 Only take screenshot if step/scenario failed
+        if (!scenario.isFailed()) {
+            return;
+        }
+
+        WebDriver driver = Base.getDriver();
 
         try {
             if (driver != null) {
@@ -71,7 +76,7 @@ public class Hook extends AllUtilityFunction {
                 TakesScreenshot ts = (TakesScreenshot) driver;
 
                 String timestamp = LocalDateTime.now()
-                        .format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+                        .format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss_SSS"));
 
                 String fileName = scenario.getName().replaceAll(" ", "_") + "_" + timestamp;
 
@@ -88,23 +93,27 @@ public class Hook extends AllUtilityFunction {
 
                 Files.copy(src.toPath(), dest.toPath());
 
-                // ✅ Correct relative path
+                // ✅ Extent Report
                 String relativePath = "screenshots/" + fileName + ".png";
-
                 ExtentCucumberAdapter.addTestStepScreenCaptureFromPath(relativePath);
 
+                // ✅ Cucumber Report
                 byte[] screenshotBytes = ts.getScreenshotAs(OutputType.BYTES);
                 scenario.attach(screenshotBytes, "image/png", fileName);
             }
 
         } catch (Exception e) {
-            System.out.println("Screenshot failed: " + e.getMessage());
-        } finally {
+            System.out.println("Step Screenshot failed: " + e.getMessage());
+        }
+    }
+    
+    @After
+    public void tearDown() {
+        WebDriver driver = Base.getDriver();
 
-            if (driver != null) {
-                driver.quit();
-                Base.unload();   // 🔥 VERY IMPORTANT (remove thread)
-            }
+        if (driver != null) {
+            driver.quit();
+            Base.unload(); // very important
         }
     }
 }

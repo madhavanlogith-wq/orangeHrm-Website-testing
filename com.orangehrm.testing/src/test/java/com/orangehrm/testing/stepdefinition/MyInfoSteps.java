@@ -40,14 +40,24 @@ public class MyInfoSteps {
                 pages.personalDetailsPage.getFirstName()
         ));
     }
-
-    @When("user updates first name and last name")
-    public void user_updates_first_name_and_last_name() {
-
-        pages.personalDetailsPage.enterFirstName("Deebiga");
-        pages.personalDetailsPage.enterLastName("RK");
+    
+    @When("user updates the first name {string}")
+    public void user_updates_the_first_name(String firstName) {
+       pages.personalDetailsPage.enterFirstName(firstName);
+    }
+    @When("user updates the last name {string}")
+    public void user_updates_the_last_name(String lastName) {
+        // Write code here that turns the phrase above into concrete actions
+        pages.personalDetailsPage.enterLastName(lastName);
+    }
+    @When("user clicks the nationality {string} and marital status dropdown {string} myInfo")
+    public void user_clicks_the_nationality_and_marital_status_dropdown_my_info(String nationality, String martialStatus) {
+    	
+       pages.personalDetailsPage.selectMaritalStatus(driver, nationality);
+       pages.personalDetailsPage.selectMaritalStatus(driver, martialStatus);
     }
 
+<<<<<<< HEAD
 //    @When("user clicks nationality and marital status dropdown")
 //    public void user_clicks_nationality_and_marital_status_dropdown() {
 //
@@ -78,6 +88,8 @@ public class MyInfoSteps {
                 pages.personalDetailsPage.getMaritalStatusDropdown()
         )).click();
     }
+=======
+>>>>>>> origin/main
 
     @When("user clicks save button")
     public void user_clicks_save_button() {

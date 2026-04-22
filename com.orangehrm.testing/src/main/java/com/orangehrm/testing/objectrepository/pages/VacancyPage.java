@@ -1,6 +1,7 @@
 package com.orangehrm.testing.objectrepository.pages;
 
 import java.time.Duration;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -95,15 +96,10 @@ public class VacancyPage {
 
 	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-	    // FIRST wait for correct page
-	    wait.until(ExpectedConditions.urlContains("viewJobVacancy"));
+	    // ✅ correct validation
+	    wait.until(ExpectedConditions.urlMatches(".*addJobVacancy/\\d+"));
 
-	    // THEN find element
-	    WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(
-	        By.xpath("//div[@class='oxd-table-body']//div[@role='row'][1]")
-	    ));
-
-	    return element.getText();
+	    return driver.getCurrentUrl();
 	}
 
 	public String getError() {
@@ -121,6 +117,8 @@ public class VacancyPage {
 
 	    selectJobTitle(job);
 	    selectHiringManager(manager);
+	    
+	    wait.until(ExpectedConditions.elementToBeClickable(saveBtn)).click();
 
 	    // ❌ DO NOT CLICK SAVE HERE
 	}
@@ -138,20 +136,47 @@ public class VacancyPage {
 		option.click();
 	}
 
-	public void selectHiringManager(String name) {
+//	public void selectHiringManager(String name) {
+//
+//		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//
+//		WebElement input = hiringManager;
+//
+//		input.click();
+//		input.clear();
+//		input.sendKeys(name);
+//
+//		WebElement option = wait.until(ExpectedConditions
+//				.elementToBeClickable(By.xpath("//div[@role='option']//span[contains(text(),'" + name + "')]")));
+//
+//		option.click();
+//	}
+	
+	 public void selectHiringManager(String managerName) {
 
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-		WebElement input = hiringManager;
+	        // 1. Click the input box
+	        WebElement input = driver.findElement(By.xpath("//input[contains(@placeholder,'Type for hints')]"));
+	        input.clear();
+	        input.click();
 
-		input.click();
-		input.clear();
-		input.sendKeys(name);
+	        // 2. TYPE name (VERY IMPORTANT in OrangeHRM)
+	        input.sendKeys(managerName.substring(0, 3)); // type first 3 letters
 
-		WebElement option = wait.until(ExpectedConditions
-				.elementToBeClickable(By.xpath("//div[@role='option']//span[contains(text(),'" + name + "')]")));
+	        // 3. Wait for dropdown options
+	        wait.until(ExpectedConditions.visibilityOfElementLocated(
+	            By.xpath("//div[@role='option']")
+	        ));
 
-		option.click();
-	}
+	        // 4. Select correct option
+	        List<WebElement> options = driver.findElements(By.xpath("//div[@role='option']//span"));
 
+	        for (WebElement option : options) {
+	            if (option.getText().trim().equalsIgnoreCase(managerName)) {
+	                option.click();
+	                break;
+	            }
+	        }
+	    }
 }
