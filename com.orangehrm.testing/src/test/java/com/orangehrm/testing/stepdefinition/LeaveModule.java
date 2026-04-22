@@ -1,13 +1,16 @@
 package com.orangehrm.testing.stepdefinition;
 
+
+import com.orangehrm.seleniumuiframwork_genricutility.AllUtilityFunction;
 import com.orangehrm.seleniumuiframwork_genricutility.Base;
+
 import com.orangehrm.seleniumuiframwork_genricutility.Pages;
 
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class LeaveModule {
-
     private Pages pages;
 
     // ✅ Initialize Pages using ThreadLocal driver
@@ -17,6 +20,21 @@ public class LeaveModule {
 
     // ================= APPLY =================
 
+    //  Excel Data Variables
+    String leaveType, fromDate, toDate, partialDays , startDay ,Comments;
+
+    //  Load Excel Data Before Scenario
+    @Before
+    public void loadExcelData() {
+        Object[][] data = AllUtilityFunction.getData("Sheet2");
+
+        leaveType = data[0][0].toString();
+        fromDate  = data[0][1].toString();
+        toDate     = data[0][2].toString();
+        partialDays  = data[0][3].toString();
+        startDay = data[0][4].toString();
+        Comments = data[0][5].toString();
+    }
     @When("navigate to leave module for  apply")
     public void navigate_to_leave_module_for_apply() {
         pages.dashboardpage.getLeaveLink().click();
@@ -27,34 +45,35 @@ public class LeaveModule {
         pages.leavepage.getApplyBtn().click();
     }
 
-    @When("select Leave Type {string}")
-    public void select_leave_type(String leaveType) {
-        pages.apply.selectLeaveType(Base.getDriver(), leaveType);
+    @When("select Leave Type")
+    public void select_leave_type() {
+    	
+        pages.apply.selectLeaveType(Base.getDriver(),leaveType);
     }
 
-    @When("select From Date {string}")
-    public void select_from_date(String fromDate) {
+    @When("select From Date")
+    public void select_from_date() {
         pages.apply.enterFromDate(Base.getDriver(), fromDate);
     }
 
-    @When("select To Date {string}")
-    public void select_to_date(String toDate) {
+    @When("select To Date")
+    public void select_to_date() {
         pages.apply.enterToDate(Base.getDriver(), toDate);
     }
 
-    @When("select Partial Date {string}")
-    public void select_partial_date(String partialDate) {
-        pages.apply.selectPartialDays(Base.getDriver(), partialDate);
+    @When("select Partial Date")
+    public void select_partial_date() {
+        pages.apply.selectPartialDays(Base.getDriver(), partialDays);
     }
 
-    @When("select Start Day {string}")
-    public void select_start_day(String startDay) {
+    @When("select Start Day")
+    public void select_start_day() {
         pages.apply.selectStartDay(Base.getDriver(), startDay);
     }
 
-    @When("enter Comments {string}")
-    public void enter_comments(String comments) {
-        pages.apply.enterComments(comments);
+    @When("enter Comments")
+    public void enter_comments() {
+        pages.apply.enterComments(Comments);
     }
 
     @When("click on Apply button")
@@ -79,19 +98,22 @@ public class LeaveModule {
         pages.leavepage.getMyLeaveBtn().click();
     }
 
-    @When("select Myleave From Date {string}")
-    public void select_myleave_from_date(String fromDate) {
+    @When("select Myleave From Date")
+    public void select_myleave_from_date(io.cucumber.datatable.DataTable table) {
+        String fromDate = table.cell(0, 0);
         pages.myleave.enterFromDate(Base.getDriver(), fromDate);
     }
-
-    @When("select Myleave To Date {string}")
-    public void select_myleave_to_date(String toDate) {
-        pages.myleave.enterToDate(Base.getDriver(), toDate);
+    
+    @When("select Myleave To Date")
+    public void select_myleave_to_date(io.cucumber.datatable.DataTable table) {
+        String toDate = table.cell(0, 0);
+        pages.myleave.enterToDate(Base.getDriver(),toDate);
     }
-
-    @When("select my Leave Type {string}")
-    public void select_my_leave_type(String leaveType) {
-        pages.myleave.selectLeaveType(Base.getDriver(), leaveType);
+    
+    @When("select my Leave Type")
+    public void select_my_leave_type(io.cucumber.datatable.DataTable table) {
+        String leaveType = table.cell(0, 0);
+        pages.myleave.selectLeaveType(Base.getDriver(),leaveType);
     }
 
     @When("click on myleave search button")
