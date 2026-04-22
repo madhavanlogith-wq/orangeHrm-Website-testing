@@ -168,8 +168,4 @@ public class AllUtilityFunction {
 	            throw new RuntimeException(e);
 	        }
 	    }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> deepika

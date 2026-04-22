@@ -6,14 +6,14 @@ Feature: My Info Module
   @Admin
   Scenario Outline: Update Personal Details using Examples
     Given user is logged in and navigates to My Info page
-<<<<<<< HEAD
+
     When user updates the first name "Deebiga"
     And user updates the last name "RK"
     And user clicks the nationality "Af" and marital status dropdown "Sin" myInfo
-=======
+
     When user updates personal details "<firstname>" "<lastname>"
     And user selects nationality and marital status
->>>>>>> deepika
+
     And user clicks save button
     Then personal details should be saved successfully
 

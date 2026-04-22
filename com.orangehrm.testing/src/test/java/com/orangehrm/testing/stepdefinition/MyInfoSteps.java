@@ -26,8 +26,7 @@ public class MyInfoSteps {
     public void user_is_logged_in_and_navigates_to_my_info_page() {
         pages.personalDetailsPage.setMyInfoMenu();
     }
-<<<<<<< HEAD
-    
+
     @When("user updates the first name {string}")
     public void user_updates_the_first_name(String firstName) {
        pages.personalDetailsPage.enterFirstName(firstName);
@@ -40,11 +39,10 @@ public class MyInfoSteps {
     @When("user clicks the nationality {string} and marital status dropdown {string} myInfo")
     public void user_clicks_the_nationality_and_marital_status_dropdown_my_info(String nationality, String martialStatus) {
     	
-       pages.personalDetailsPage.selectMaritalStatus(driver, nationality);
-       pages.personalDetailsPage.selectMaritalStatus(driver, martialStatus);
+       pages.personalDetailsPage.selectMaritalStatus(Base.getDriver(), nationality);
+       pages.personalDetailsPage.selectMaritalStatus(Base.getDriver(), martialStatus);
     }
 
-=======
 
     // ================= PERSONAL DETAILS =================
 
@@ -58,12 +56,12 @@ public class MyInfoSteps {
         pages.personalDetailsPage.setNationalityDropdown();
         pages.personalDetailsPage.setMaritalStatusDropdown();
     }
->>>>>>> deepika
 
-    @When("user clicks save button")
-    public void user_clicks_save_button() {
-        pages.personalDetailsPage.setSaveButton();
-    }
+//
+//    @When("user clicks save button")
+//    public void user_clicks_save_button() {
+//        pages.personalDetailsPage.setSaveButton();
+//    }
 
     @Then("personal details should be saved successfully")
     public void personal_details_should_be_saved_successfully() {

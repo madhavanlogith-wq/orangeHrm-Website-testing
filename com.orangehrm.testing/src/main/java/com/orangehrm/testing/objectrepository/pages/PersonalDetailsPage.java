@@ -1,11 +1,11 @@
 package com.orangehrm.testing.objectrepository.pages;
 
-<<<<<<< HEAD
+
 import org.openqa.selenium.By;
-=======
+
 import java.time.Duration;
 
->>>>>>> deepika
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,17 +16,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.orangehrm.seleniumuiframwork_genricutility.Base;
 
-<<<<<<< HEAD
+
   
     // ================= LOCATORS =================
+//
+//    // First Name
+//    @FindBy(xpath ="//input[@name='firstName']")
+//    // Last Name
+//    @FindBy(xpath = "//input[@name='lastName']")
 
-    // First Name
-    @FindBy(xpath ="//input[@name='firstName']")
-    private WebElement firstName;
-
-	// Last Name
-    @FindBy(xpath = "//input[@name='lastName']")
-=======
 public class PersonalDetailsPage extends Base {
 
     private WebDriver driver;
@@ -53,7 +51,6 @@ public class PersonalDetailsPage extends Base {
     private WebElement firstName;
 
     @FindBy(name = "lastName")
->>>>>>> deepika
     private WebElement lastName;
 
     @FindBy(xpath = "(//div[contains(@class,'oxd-select-text')])[1]")
@@ -73,14 +70,13 @@ public class PersonalDetailsPage extends Base {
 
     // ================= GETTERS =================
 
-<<<<<<< HEAD
-=======
+
     public WebElement getFirstNameError() {
 		return firstNameError;
 	}
     
     public boolean isFirstNameErrorDisplayed() {
->>>>>>> deepika
+
 
         new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(ExpectedConditions.visibilityOf(firstNameError));
@@ -96,7 +92,7 @@ public class PersonalDetailsPage extends Base {
         return contactDetailsTab;
     }
 
-<<<<<<< HEAD
+
 	public WebElement getSaveButton() {
 		return saveButton;
 	}
@@ -141,8 +137,8 @@ public class PersonalDetailsPage extends Base {
 	public void clickSaveButton() {
 	    getSaveButton().click();
 	}
-}
-=======
+
+
     public WebElement getEmergencyContactsTab() {
         return emergencyContactsTab;
     }
@@ -163,9 +159,7 @@ public class PersonalDetailsPage extends Base {
         return maritalStatusDropdown;
     }
 
-    public WebElement getSaveButton() {
-        return saveButton;
-    }
+ 
 
     // ================= ACTION METHODS (SET METHODS STYLE) =================
 
@@ -215,4 +209,4 @@ public class PersonalDetailsPage extends Base {
     }
     
 }
->>>>>>> deepika
+
