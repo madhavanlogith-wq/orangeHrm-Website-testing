@@ -9,13 +9,10 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
 		features = {"src/test/java/com/orangehrm/testing/featurefile/MyInfo.feature"},
 		glue = "com.orangehrm.testing.stepdefinition",
-<<<<<<< HEAD
+
 
 		dryRun = true,
 
-=======
-	
->>>>>>> madhavan
 		monochrome = true,
 		plugin= {
 				"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
