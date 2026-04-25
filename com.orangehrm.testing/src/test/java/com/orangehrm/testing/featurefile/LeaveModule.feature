@@ -110,6 +110,6 @@ Scenario Outline: HR/Manager assigns leave to employee with valid data
 
 Examples:
     | employeeName         | leaveType     | fromDate   | toDate     | comments            | message                      |
-    | user name            | CAN - FMLA    | 2026-05-05 | 2026-05-06 | Medical emergency   | Leave assigned successfully  |
+    | user3            | CAN - FMLA    | 2026-05-05 | 2026-05-06 | Medical emergency   | Leave assigned successfully  |
 
     
