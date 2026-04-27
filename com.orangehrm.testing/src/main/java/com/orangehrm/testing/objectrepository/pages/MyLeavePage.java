@@ -105,7 +105,7 @@ public class MyLeavePage {
          wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         WebElement record = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//div[.='Employee Name']/parent::div/following::div/descendant::div[contains(text(),'user ')]")));
+                By.xpath("//div[.='Employee Name']/parent::div/following::div/descendant::div[contains(text(),'virat ')]")));
 
         
         Assert.assertTrue(record.isDisplayed(), "Leave record not displayed!");

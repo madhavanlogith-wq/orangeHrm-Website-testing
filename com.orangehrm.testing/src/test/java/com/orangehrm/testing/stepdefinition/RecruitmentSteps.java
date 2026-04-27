@@ -21,8 +21,7 @@ public class RecruitmentSteps {
     // ✅ Initialize Pages with driver
     private Pages pages;
 
-    @Before
-    public void init() {
+    public RecruitmentSteps() {
         pages = new Pages(Base.getDriver());
     }
 
@@ -33,7 +32,7 @@ public class RecruitmentSteps {
     //  Load Excel Data Before Scenario
     @Before
     public void loadExcelData() {
-        Object[][] data = AllUtilityFunction.getData("Candidate Data");
+        Object[][] data = AllUtilityFunction.getData("CandidateData");
 
         FirstName = data[0][0].toString();
         LastName  = data[0][1].toString();
@@ -187,11 +186,7 @@ public class RecruitmentSteps {
     @Then("Vacancy details should be displayed correctly")
     public void verifyVacancySearch() {
 
-        Assert.assertTrue(
-                pages.vp.getResult() != null &&
-                pages.vp.getResult().length() > 0,
-                "Vacancy search failed"
-        );
+       pages.vp.verifyVacancy();
     }
 
     // ================= VALIDATIONS =================

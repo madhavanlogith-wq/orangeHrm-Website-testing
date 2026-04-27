@@ -10,7 +10,7 @@ Background:
     When user clicks on Configuration menu
     And user clicks on Custom Fields option
     And user clicks on Add button
-    And user enters field name "Department Type"
+    And user enters field name "robot automation"
     And user selects screen "Contact Details"
     And user selects type "Drop Down"
     And user clicks on Save button

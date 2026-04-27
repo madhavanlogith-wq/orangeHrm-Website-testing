@@ -22,10 +22,10 @@ public class Post {
     @FindBy(xpath = "//a[@href='/web/index.php/buzz/viewBuzz']")
     WebElement buzz;
 
-    @FindBy(xpath = "//textarea[contains(@class,'oxd-buzz-post-input')]")
+    @FindBy(xpath = "//textarea")
     WebElement textField;
 
-    @FindBy(xpath = "//button[contains(@class,'oxd-button--main')]")
+    @FindBy(xpath = "//button[@type='submit']")
     WebElement postButton;
 
     public void openBuzzPage() {

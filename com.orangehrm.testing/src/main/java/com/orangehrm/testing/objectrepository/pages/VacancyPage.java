@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class VacancyPage {
 
@@ -46,7 +47,10 @@ public class VacancyPage {
 
 	@FindBy(xpath = "//span[contains(text(),'Required')]")
 	WebElement errorMsg;
-
+	
+	@FindBy(xpath = "//div[.='Vacancy']/parent::div/following::div/descendant::div[contains(text(),'Software ')]")
+	WebElement vacancyList;
+	
 	public void goToVacancy() {
 
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -101,7 +105,9 @@ public class VacancyPage {
 
 	    return driver.getCurrentUrl();
 	}
-
+	public void verifyVacancy() {
+		Assert.assertTrue(vacancyList.isDisplayed(),"vacancy record not found");
+	}
 	public String getError() {
 		return errorMsg.getText();
 	}

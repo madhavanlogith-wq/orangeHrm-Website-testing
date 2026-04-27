@@ -53,16 +53,22 @@ public class MyInfoSteps {
 
     @When("user selects nationality and marital status")
     public void user_selects_nationality_and_marital_status() {
-        pages.personalDetailsPage.setNationalityDropdown();
-        pages.personalDetailsPage.setMaritalStatusDropdown();
+    	pages.personalDetailsPage.selectNationality(Base.getDriver(), "Af");
+        pages.personalDetailsPage.selectMaritalStatus(Base.getDriver(), "Sin");
     }
 
-//
-//    @When("user clicks save button")
-//    public void user_clicks_save_button() {
-//        pages.personalDetailsPage.setSaveButton();
-//    }
+    @When("user clicks save button for the updated personal details")
+    public void user_clicks_save_button_for_the_updated_personal_details() {
+    	pages.personalDetailsPage.setSaveButton();
+    }
+    
+    @When("user clicks save button for personal details")
+    public void user_clicks_save_button_for_personal_details() {
 
+    	pages.personalDetailsPage.setSaveButton();
+    }
+
+    // pages.personalDetailsPage.setSaveButton();
     @Then("personal details should be saved successfully")
     public void personal_details_should_be_saved_successfully() {
         String value = pages.personalDetailsPage.getFirstName().getAttribute("value");

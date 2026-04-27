@@ -19,7 +19,7 @@ Scenario: Add candidate with valid mandatory details
     Given User navigates to Recruitment > Vacancies section
     When User clicks on Add Vacancy button
     And User enters vacancy details
-      | VacancyName   | Tim    |
+      | VacancyName   | Tim david   |
       | JobTitle      | Account Assistant |
       | HiringManager |Rahul Das |
     And User clicks Save button

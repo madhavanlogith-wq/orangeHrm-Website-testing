@@ -49,7 +49,10 @@ public class jobTitleTest extends Base {
 	@When("user adds job note")
 	public void user_adds_job_note(String dataTable) {
 		jt.setNoteField(dataTable);
-		jt.setSaveJobTitle();
+	}
+	@When("user clicks save button of job title")
+	public void user_clicks_save_button_of_job_title() {
+	    jt.setSaveJobTitle();
 	}
 
 	@Then("job title should be added successfully")

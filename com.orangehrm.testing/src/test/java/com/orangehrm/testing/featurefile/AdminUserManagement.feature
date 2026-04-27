@@ -19,4 +19,4 @@ Scenario Outline: Add new user with valid details in Admin module
 
 Examples:
   | role  | empName     | status  | newUsername | newPassword | confirmPassword |
-  | Admin | Ranga   | Enabled | admin12345    | Admin@1234  | Admin@1234      |
+  | Admin | Ranga   | Enabled | admin1234576    | Admin@1234  | Admin@1234      |

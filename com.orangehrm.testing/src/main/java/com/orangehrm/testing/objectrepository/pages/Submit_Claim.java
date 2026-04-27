@@ -24,10 +24,10 @@ public class Submit_Claim {
     @FindBy(xpath = "//a[contains(text(),'Submit Claim')]")
     WebElement submitClaim;
 
-    @FindBy(xpath = "//label[contains(.,'Event')]/following::div[1]")
+    @FindBy(xpath = "//label[contains(text(),'Event')]/parent::div/following-sibling::div")
     WebElement eventDropdown;
 
-    @FindBy(xpath = "//label[contains(.,'Currency')]/following::div[1]")
+    @FindBy(xpath = "//label[contains(text(),'Currency')]/parent::div/following-sibling::div")
     WebElement currencyDropdown;
 
     @FindBy(xpath = "//textarea")
@@ -63,10 +63,6 @@ public class Submit_Claim {
 
     public void selectCurrency(String currency) {
 
-        // wait until page loader disappears (IMPORTANT FIX)
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(
-            By.xpath("//div[contains(@class,'oxd-form-loader')]")
-        ));
 
         // now click dropdown
         wait.until(ExpectedConditions.elementToBeClickable(currencyDropdown)).click();

@@ -2,6 +2,7 @@ package com.orangehrm.testing.objectrepository.pages;
 
 import java.time.Duration;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -89,8 +90,12 @@ public class ContactDetailsPage {
     }
 
     public void enterMobile(String value) {
-        getMobile().clear();
-        getMobile().sendKeys(value);
+    	WebElement ele = getMobile();
+ 	    ele.click();
+ 	    ele.sendKeys(Keys.CONTROL + "a");
+ 	    ele.sendKeys(Keys.DELETE);
+ 	    ele.sendKeys(value);
+ 	    ele.sendKeys(Keys.TAB);
     }
 
     public void enterWorkEmail(String value) {

@@ -47,7 +47,7 @@ public class PersonalDetailsPage extends Base {
 
     // ================= FORM FIELDS =================
 
-    @FindBy(name = "firstName")
+    @FindBy(xpath = "//input[@name='firstName']" )
     private WebElement firstName;
 
     @FindBy(name = "lastName")
@@ -99,7 +99,17 @@ public class PersonalDetailsPage extends Base {
 	// ================= ACTION METHODS =================
 
 	public void enterFirstName(String fname) {
-	    WebElement ele = getFirstName();
+
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+	    // ✅ wait until loader disappears
+	    wait.until(ExpectedConditions.invisibilityOfElementLocated(
+	            By.className("oxd-form-loader")));
+
+	    // ✅ get fresh element AFTER wait
+	    WebElement ele = wait.until(ExpectedConditions.elementToBeClickable(
+	            By.name("firstName")));
+
 	    ele.click();
 	    ele.sendKeys(Keys.CONTROL + "a");
 	    ele.sendKeys(Keys.DELETE);

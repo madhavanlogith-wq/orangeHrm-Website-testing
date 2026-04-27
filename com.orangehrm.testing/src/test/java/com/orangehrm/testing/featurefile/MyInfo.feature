@@ -14,7 +14,7 @@ Feature: My Info Module
     When user updates personal details "<firstname>" "<lastname>"
     And user selects nationality and marital status
 
-    And user clicks save button
+    And user clicks save button for the updated personal details
     Then personal details should be saved successfully
 
     Examples:
@@ -44,7 +44,7 @@ Feature: My Info Module
     Given user is logged in and navigates to My Info page
     When user updates personal details from excel "My_Info" row 1
     And user selects nationality and marital status
-    And user clicks save button
+    And user clicks save button for personal details
     Then personal details should be saved successfully
 
 

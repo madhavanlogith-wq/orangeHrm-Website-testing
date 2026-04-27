@@ -5,6 +5,6 @@ Background:
   And user is on buzz page
 @Admin
 Scenario: Create and post content
-  When user enters "hello"
+  When user enters "hello1"
   And user clicks post
   Then post should be created successfully

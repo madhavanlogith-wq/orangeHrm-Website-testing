@@ -77,11 +77,13 @@ public class orgAndQuaTest extends Base {
     public void user_enters_address() {
         ong.setAddressField(address);
     }
+    @When("user clicks save button")
+    public void user_clicks_save_button() {
+        ong.setSaveButton();
+    }
 
     @Then("location should be added successfully")
     public void location_should_be_added_successfully() {
-
-        ong.setSaveButton();
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
         WebElement messageElement = wait.until(
                 ExpectedConditions.visibilityOf(ong.getSuccessMessage()));

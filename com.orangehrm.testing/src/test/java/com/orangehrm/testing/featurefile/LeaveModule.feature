@@ -5,7 +5,7 @@ Feature: Leave Module
     When navigate to Leave module to perform entitlements
     And click on Entitlements dropdown
     And click on Add Entitlements
-    And enter Employee Name "user name"
+    And enter Employee Name "virat"
     And select Leave Type "CAN - FMLA" for addentitlement
     And select Leave Period "2021-01-01 - 2021-31-12" to permit period
     And select on the entitlement period "776"
@@ -27,7 +27,7 @@ Feature: Leave Module
     Then verify success message "Leave request successfully submitted"
     
     @Login_as_employee
-    Scenario: Apply Leave
+    Scenario: Apply Leave for failed submition
 
     When navigate to leave module for  apply
     And click on Apply
@@ -47,17 +47,17 @@ When navigate to leave module for myleave
 When click on My Leave 
 
 And select Myleave From Date
-  | 2026-05-05 |
+  | 01-04-2026 |
 
 And select Myleave To Date
-  | 2026-05-06 |
+  | 04-04-2026 |
 
 And select my Leave Type
-  | CAN - FMLA |
+  | CAN - Bereavement |
 
 And click on myleave search button
 
-Then filtered succesfully "user name"
+Then filtered succesfully "virat"
    
   
     @Login_as_employee
@@ -65,7 +65,7 @@ Then filtered succesfully "user name"
     When navigate to Leave module to navigate report
     And click on Reports dropdown
     And click on My Leave Entitlements and Usage Report
-    And select Leave Period for generate report "2025-01-01 - 2025-31-12"
+    And select Leave Period for generate report "01-01-2022 - 31-12-2022"
     And click on Generate button
     Then verify report is generated successfully
     
@@ -83,14 +83,14 @@ Then filtered succesfully "user name"
     Scenario: HR/Manager searches leave records with valid filters
     When navigate to Leave module to perform leave list
     And click on Leave List
-    And select From Date "2026-05-05" for leave list
-    And select To Date "2026-05-06" for leave list
+    And select From Date "01-04-2026" for leave list
+    And select To Date "04-04-2026" for leave list
     And select Status for leave list
-    And select Leave Type  for the leave list "CAN - FMLA"
-    And enter Employee Name "user name" for leave list
-    And select Sub Unit  for the  leave list "Administration"
+    And select Leave Type  for the leave list "CAN - Bereavement"
+    And enter Employee Name "virat" for leave list
+    And select Sub Unit  for the  leave list "-- Select --"
     And click on Search button on leave list
-    Then verify leave records matching all selected filters are displayed on the leave list "user  name"
+    Then verify leave records matching all selected filters are displayed on the leave list "virat"
     
     
   @Admin
@@ -110,6 +110,6 @@ Scenario Outline: HR/Manager assigns leave to employee with valid data
 
 Examples:
     | employeeName         | leaveType     | fromDate   | toDate     | comments            | message                      |
-    | user3            | CAN - FMLA    | 2026-05-05 | 2026-05-06 | Medical emergency   | Leave assigned successfully  |
+    | dhoni                | CAN - FMLA    | 2026-05-05 | 2026-05-06 | Medical emergency   | Leave assigned successfully  |
 
     

@@ -56,7 +56,7 @@ public class Hook extends AllUtilityFunction {
     @Before("@Login_as_employee")
     public void setupEmployee() throws IOException {
         initProperties("src/main/resources/commondate.properties");
-        launchAndLogin("user1", "user@123");
+        launchAndLogin("virat", "virat@123");
     }
 
     // ✅ SCREENSHOT FOR ALL SCENARIOS
