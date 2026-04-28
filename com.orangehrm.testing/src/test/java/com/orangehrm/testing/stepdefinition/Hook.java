@@ -29,13 +29,11 @@ public class Hook extends AllUtilityFunction {
         this.base = base;
     }
 
-    // 🔥 COMMON METHOD
+   
     public void launchAndLogin(String username, String password) throws IOException {
 
-        WebDriver driver = new EdgeDriver();   // ✅ create local
-
-        Base.setDriver(driver);                // ✅ store in ThreadLocal
-
+        WebDriver driver = new EdgeDriver();  
+        Base.setDriver(driver);                
         String URL = getPropertyValue("url");
 
         configMaximizedBrowser(driver);
@@ -43,7 +41,7 @@ public class Hook extends AllUtilityFunction {
 
         driver.get(URL);
 
-        pages = new Pages(driver);             // ✅ thread-safe pages
+        pages = new Pages(driver);            
         pages.loginpage.loginPage(username, password);
     }
 
@@ -59,11 +57,11 @@ public class Hook extends AllUtilityFunction {
         launchAndLogin("virat", "virat@123");
     }
 
-    // ✅ SCREENSHOT FOR ALL SCENARIOS
+   
     @io.cucumber.java.AfterStep
     public void afterEachStep(Scenario scenario) {
 
-        // 🛑 Only take screenshot if step/scenario failed
+  
         if (!scenario.isFailed()) {
             return;
         }
@@ -93,11 +91,11 @@ public class Hook extends AllUtilityFunction {
 
                 Files.copy(src.toPath(), dest.toPath());
 
-                // ✅ Extent Report
+  
                 String relativePath = "screenshots/" + fileName + ".png";
                 ExtentCucumberAdapter.addTestStepScreenCaptureFromPath(relativePath);
 
-                // ✅ Cucumber Report
+               
                 byte[] screenshotBytes = ts.getScreenshotAs(OutputType.BYTES);
                 scenario.attach(screenshotBytes, "image/png", fileName);
             }
@@ -113,7 +111,7 @@ public class Hook extends AllUtilityFunction {
 
         if (driver != null) {
             driver.quit();
-            Base.unload(); // very important
+            Base.unload(); 
         }
     }
 }

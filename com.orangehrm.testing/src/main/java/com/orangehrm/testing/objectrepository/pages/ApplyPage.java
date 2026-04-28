@@ -89,7 +89,7 @@ public class ApplyPage {
                 .visibilityOfElementLocated(By.xpath("//span[contains(text(),'" + type + "')]")));
 
         option.click();
-       
+    
     }
 
     // Enter From Date
@@ -155,11 +155,19 @@ public class ApplyPage {
     	            By.xpath("//p[contains(@class,'oxd-toast-content-text')]")));
 
     	    String msg = toast.getText();
-    	    System.out.println("Toast Message: " + msg);
+    	    System.out.println("Success Msg: " + msg);
 
     	    Assert.assertTrue(msg.contains("Success"), "Leave not applied!");
     }
     
-    
+    public void failedSubmittion(WebDriver driver) {
+    	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+    	
+    	WebElement ele = wait.until(ExpectedConditions.visibilityOfElementLocated(
+    			By.xpath("[class='oxd-text oxd-text--p oxd-text--toast-message oxd-toast-content-text']")));
+    	String msg = ele.getText();
+    	System.out.println("succes message "+ msg);
+    	Assert.assertTrue(msg.contains("Failed"), "not validated correctly");
+    }
     
 }

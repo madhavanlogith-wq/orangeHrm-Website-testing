@@ -65,7 +65,7 @@ Then filtered succesfully "virat"
     When navigate to Leave module to navigate report
     And click on Reports dropdown
     And click on My Leave Entitlements and Usage Report
-    And select Leave Period for generate report "01-01-2022 - 31-12-2022"
+    And select Leave Period for generate report "2022-01-01 - 2022-31-12"
     And click on Generate button
     Then verify report is generated successfully
     
@@ -110,6 +110,6 @@ Scenario Outline: HR/Manager assigns leave to employee with valid data
 
 Examples:
     | employeeName         | leaveType     | fromDate   | toDate     | comments            | message                      |
-    | dhoni                | CAN - FMLA    | 2026-05-05 | 2026-05-06 | Medical emergency   | Leave assigned successfully  |
+    | dhoni mahi               | CAN - FMLA    | 2026-05-05 | 2026-05-06 | Medical emergency   | Leave assigned successfully  |
 
     
